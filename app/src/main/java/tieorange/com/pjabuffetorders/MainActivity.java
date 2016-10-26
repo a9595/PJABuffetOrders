@@ -2,13 +2,13 @@ package tieorange.com.pjabuffetorders;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,16 +17,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import tieorange.com.pjabuffetorders.fragments.OrdersFragment;
+import tieorange.com.pjabuffetorders.fragments.ProductsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
   private static final int ID_PRODUCTS = 1;
   public static final int ID_ORDERS = 2;
+  @BindView(R.id.fragmentContainer) FrameLayout mFragmentContainer;
   private Drawer mDrawerBuild;
   @BindView(R.id.toolbar) public Toolbar mToolbar;
+  private ProductsFragment mProductsFragment;
+  private OrdersFragment mOrdersFragment;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -35,17 +39,26 @@ public class MainActivity extends AppCompatActivity {
 
     setSupportActionBar(mToolbar);
 
-    initFAB();
+    initFragments();
     initDrawer();
+  }
+
+  private void initFragments() {
+    mProductsFragment = ProductsFragment.newInstance();
+    mOrdersFragment = OrdersFragment.newInstance();
+  }
+
+  private void setFragment(Fragment fragment) {
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
   }
 
   private void initDrawer() {
 
     //if you want to update the items at a later time it is recommended to keep it in a variable
-    PrimaryDrawerItem itemProducts =
-        new PrimaryDrawerItem().withIdentifier(ID_PRODUCTS).withName(R.string.products).withIcon(GoogleMaterial.Icon.gmd_local_pizza);
-    PrimaryDrawerItem itemOrders =
-        new PrimaryDrawerItem().withIdentifier(ID_ORDERS).withName(R.string.orders).withIcon(GoogleMaterial.Icon.gmd_shopping_cart);
+    SecondaryDrawerItem itemProducts =
+        new SecondaryDrawerItem().withIdentifier(ID_PRODUCTS).withName(R.string.products).withIcon(GoogleMaterial.Icon.gmd_local_pizza);
+    SecondaryDrawerItem itemOrders =
+        new SecondaryDrawerItem().withIdentifier(ID_ORDERS).withName(R.string.orders).withIcon(GoogleMaterial.Icon.gmd_shopping_cart);
     //SecondaryDrawerItem secondaryDrawerItem = new SecondaryDrawerItem().withName(R.string.settings);
 
     //create the drawer and remember the `Drawer` result object
@@ -54,17 +67,22 @@ public class MainActivity extends AppCompatActivity {
         .addDrawerItems(itemProducts, itemOrders)
         .withOnDrawerItemClickListener(getOnDrawerItemClickListener())
         .build();
+
+    mDrawerBuild.setSelection(itemProducts);
   }
 
   @NonNull private Drawer.OnDrawerItemClickListener getOnDrawerItemClickListener() {
     return new Drawer.OnDrawerItemClickListener() {
       @Override public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-        switch ((int) drawerItem.getIdentifier()) {
+        int identifier = (int) drawerItem.getIdentifier();
+        switch (identifier) {
           case ID_ORDERS:
-            Toast.makeText(MainActivity.this, "orders", Toast.LENGTH_SHORT).show();
+            setFragment(mOrdersFragment);
+            setTitle(R.string.orders);
             break;
           case ID_PRODUCTS:
-            Toast.makeText(MainActivity.this, "products", Toast.LENGTH_SHORT).show();
+            setFragment(mProductsFragment);
+            setTitle(R.string.products);
             break;
 
           default:
@@ -75,15 +93,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
       }
     };
-  }
-
-  private void initFAB() {
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-      }
-    });
   }
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
