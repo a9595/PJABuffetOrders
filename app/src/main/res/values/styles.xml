@@ -16,5 +16,11 @@
       parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
   <style name="AppTheme.PopupOverlay"
       parent="ThemeOverlay.AppCompat.Light"/>
+  <style name="productPrice">
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="productName">
+    <item name="android:textSize">18sp</item>
+  </style>
 
 </resources>

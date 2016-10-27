@@ -1,4 +1,4 @@
-package tieorange.com.pjabuffetorders;
+package tieorange.com.pjabuffetorders.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +19,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.fragments.OrdersFragment;
 import tieorange.com.pjabuffetorders.fragments.ProductsFragment;
 
