@@ -1,6 +1,7 @@
 package tieorange.com.pjabuffetorders.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -77,8 +78,10 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
   }
 
   private void initItemClickListener() {
-    ItemClickSupport.addTo(mRecycler)
-        .setOnItemClickListener((recyclerView, position, v) -> Henson.with(getContext()).gotoProductActivity().mProduct(mAdapter.getItem(position)));
+    ItemClickSupport.addTo(mRecycler).setOnItemClickListener((recyclerView, position, v) -> {
+      Intent intent = Henson.with(getContext()).gotoProductActivity().mProduct(mAdapter.getItem(position)).build();
+      startActivity(intent);
+    });
   }
 
   private void initAdapter() {

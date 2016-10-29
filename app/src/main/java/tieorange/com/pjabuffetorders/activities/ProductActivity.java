@@ -2,28 +2,36 @@ package tieorange.com.pjabuffetorders.activities;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.f2prateek.dart.Dart;
-import com.f2prateek.dart.HensonNavigable;
 import com.f2prateek.dart.InjectExtra;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.pojo.api.Product;
 
-//@HensonNavigable
 public class ProductActivity extends AppCompatActivity {
 
   @BindView(R.id.toolbar) Toolbar mToolbar;
-  @BindView(R.id.name) TextView mName;
-  @BindView(R.id.content_product) ConstraintLayout mContentProduct;
-  @BindView(R.id.fab) FloatingActionButton mFab;
-
+  //@BindView(R.id.content_product) ConstraintLayout mContentProduct;
   @InjectExtra Product mProduct;
+  @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
+  @BindView(R.id.app_bar) AppBarLayout mAppBar;
+  @BindView(R.id.fab) FloatingActionButton mFab;
+  @BindView(R.id.tvName) TextView mTvName;
+  @BindView(R.id.tvPrice) TextView mTvPrice;
+  @BindView(R.id.tvTime) TextView mTvTime;
+  @BindView(R.id.name) EditText mName;
+  @BindView(R.id.price) EditText mPrice;
+  @BindView(R.id.time) EditText mTime;
+  @BindView(R.id.content_product) ConstraintLayout mContentProduct;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -34,6 +42,13 @@ public class ProductActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
 
     initFAB();
+    initViews();
+  }
+
+  private void initViews() {
+    mName.setText(mProduct.name);
+    mPrice.setText(mProduct.getStringPrice());
+    mTime.setText(String.valueOf(mProduct.cookingTime));
   }
 
   private void initFAB() {
