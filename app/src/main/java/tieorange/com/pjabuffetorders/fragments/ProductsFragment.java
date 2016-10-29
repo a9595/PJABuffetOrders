@@ -1,7 +1,6 @@
 package tieorange.com.pjabuffetorders.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -9,16 +8,16 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
-import com.squareup.picasso.Picasso;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.activities.Henson;
 import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
+import tieorange.com.pjabuffetorders.activities.ui.ItemClickSupport;
+import tieorange.com.pjabuffetorders.activities.ui.ViewHolderProduct;
 import tieorange.com.pjabuffetorders.pojo.api.Product;
 import tieorange.com.pjabuffetorders.utils.Constants;
 
@@ -30,6 +29,7 @@ import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 public class ProductsFragment extends android.support.v4.app.Fragment {
 
   @BindView(R.id.recycler) RecyclerView mRecycler;
+  private FirebaseRecyclerAdapter<Product, ViewHolderProduct> mAdapter;
 
   public static ProductsFragment newInstance() {
     Bundle args = new Bundle();
@@ -72,38 +72,26 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
     mRecycler.addItemDecoration(new GridItemSpacingDecorator(spanCount, spacing));
 
     initAdapter();
+
+    initItemClickListener();
+  }
+
+  private void initItemClickListener() {
+    ItemClickSupport.addTo(mRecycler)
+        .setOnItemClickListener((recyclerView, position, v) -> Henson.with(getContext()).gotoProductActivity().mProduct(mAdapter.getItem(position)));
   }
 
   private void initAdapter() {
     DatabaseReference databaseReference = MyApplication.sFirebaseDatabase.getReference(Constants.PRODUCTS);
-    FirebaseRecyclerAdapter<Product, ViewHolderProduct> adapter =
+    mAdapter =
         new FirebaseRecyclerAdapter<Product, ViewHolderProduct>(Product.class, R.layout.item_menu, ViewHolderProduct.class, databaseReference) {
           @Override protected void populateViewHolder(ViewHolderProduct viewHolder, Product model, int position) {
             viewHolder.initProduct(model, getContext());
           }
         };
-    mRecycler.setAdapter(adapter);
+    mRecycler.setAdapter(mAdapter);
   }
 
   private void initFirebase() {
-  }
-
-  static class ViewHolderProduct extends RecyclerView.ViewHolder {
-    @BindView(R.id.image) ImageView image;
-    @BindView(R.id.name) TextView name;
-    @BindView(R.id.price) TextView price;
-    @BindView(R.id.cookingTime) TextView cookingTime;
-
-    public ViewHolderProduct(View itemView) {
-      super(itemView);
-      ButterKnife.bind(this, itemView);
-    }
-
-    public void initProduct(Product model, Context context) {
-      name.setText(model.name);
-      price.setText(model.getStringPrice());
-      cookingTime.setText(model.cookingTime + " min");
-      Picasso.with(context).load(model.photoUrl).placeholder(R.drawable.pierogi_ruskie).into(image);
-    }
   }
 }

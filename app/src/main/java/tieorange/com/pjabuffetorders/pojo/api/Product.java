@@ -4,15 +4,19 @@ import com.google.firebase.database.Exclude;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import org.parceler.Parcel;
 
 /**
  * Created by tieorange on 15/10/2016.
  */
-public class Product implements Cloneable {
+@Parcel public class Product implements Cloneable {
   public String name;
   public int price;
   public int cookingTime;
   public String photoUrl;
+
+  public Product() {
+  }
 
   public Product(String name, double price, int cookingTime) {
     this.name = name;
@@ -23,7 +27,6 @@ public class Product implements Cloneable {
   private static int convertPriceDoubleToInt(double price) {
     return (int) (price * 100);
   }
-
 
   public static List<Product> getDummy(int count) {
     List<Product> productList = new ArrayList<>();
@@ -36,8 +39,7 @@ public class Product implements Cloneable {
     return productList;
   }
 
-  @Exclude
-  public String getStringPrice() {
+  @Exclude public String getStringPrice() {
     double priceDouble = price / 100f;
     return String.format("%.2f", priceDouble) + " zł";
   }
