@@ -41,6 +41,7 @@ public class ProductActivity extends AppCompatActivity {
   @BindView(R.id.price) EditText mPrice;
   @BindView(R.id.time) EditText mTime;
   @BindView(R.id.content_product) ConstraintLayout mContentProduct;
+  public static final String CURRENCY = "zł ";
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -82,6 +83,7 @@ public class ProductActivity extends AppCompatActivity {
   }
 
   private int getPriceInteger(String priceString) {
+    priceString = getCleanPriceString(priceString);
     double priceDouble = Double.parseDouble(priceString);
     return Product.convertPriceDoubleToInt(priceDouble);
   }
@@ -103,8 +105,7 @@ public class ProductActivity extends AppCompatActivity {
         if (!s.toString().equals(current)) {
           mPrice.removeTextChangedListener(this);
 
-          String currency = "zł ";
-          String cleanString = s.toString().replaceAll("[" + currency + ",.]", "");
+          String cleanString = getCleanPriceString(s);
 
           double parsed = 0;
           try {
@@ -115,8 +116,7 @@ public class ProductActivity extends AppCompatActivity {
           double priceDouble = parsed / 100;
 
           //String formatted = NumberFormat.getCurrencyInstance().format(priceDouble);
-          String formatted = currency + String.format("%.2f", priceDouble);
-          ;
+          String formatted = CURRENCY + String.format("%.2f", priceDouble);
 
           current = formatted;
           mPrice.setText(formatted);
@@ -130,6 +130,10 @@ public class ProductActivity extends AppCompatActivity {
 
       }
     });
+  }
+
+  private String getCleanPriceString(CharSequence s) {
+    return s.toString().replaceAll("[" + CURRENCY + ",.]", "");
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
