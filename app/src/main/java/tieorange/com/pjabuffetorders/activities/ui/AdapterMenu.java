@@ -41,7 +41,7 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.ViewHolder> {
     Product product = mProducts.get(position);
     holder.name.setText(product.name);
 
-    holder.price.setText(product.getStringPrice());
+    holder.price.setText(product.getStringPriceWithZlote());
     String cookingTimeText = String.valueOf(product.cookingTime) + " min";
     holder.cookingTime.setText(cookingTimeText);
     Picasso.with(mContext).load(product.photoUrl).placeholder(R.drawable.ic_pie_chart_outlined).into(holder.image);

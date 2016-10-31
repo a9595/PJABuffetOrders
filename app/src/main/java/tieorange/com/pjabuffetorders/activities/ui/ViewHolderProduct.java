@@ -27,7 +27,7 @@ public class ViewHolderProduct extends RecyclerView.ViewHolder {
 
   public void initProduct(Product model, Context context) {
     name.setText(model.name);
-    price.setText(model.getStringPrice());
+    price.setText(model.getStringPriceWithZlote());
     cookingTime.setText(model.cookingTime + " min");
     Picasso.with(context).load(model.photoUrl).placeholder(R.drawable.pierogi_ruskie).into(image);
   }

@@ -7,6 +7,9 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.f2prateek.dart.Dart;
 import com.f2prateek.dart.InjectExtra;
 import tieorange.com.pjabuffetorders.MyApplication;
@@ -23,6 +27,7 @@ import tieorange.com.pjabuffetorders.utils.interfaces.IPositiveDialog;
 
 public class ProductActivity extends AppCompatActivity {
 
+  private static final String TAG = ProductActivity.class.getCanonicalName();
   @BindView(R.id.toolbar) Toolbar mToolbar;
   //@BindView(R.id.content_product) ConstraintLayout mContentProduct;
   @InjectExtra Product mProduct;
@@ -46,11 +51,12 @@ public class ProductActivity extends AppCompatActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     initViews();
+    setOnPriceChangeListener();
   }
 
   private void initViews() {
     mName.setText(mProduct.name);
-    String price = String.valueOf(mProduct.getDoublePrice());
+    String price = "zł " + String.valueOf(mProduct.getStringPrice());
     mPrice.setText(price);
     mTime.setText(String.valueOf(mProduct.cookingTime));
   }
@@ -60,19 +66,7 @@ public class ProductActivity extends AppCompatActivity {
   }
 
   private void saveDataToFirebase() {
-    /*Query query = MyApplication.sProductsReference.orderByKey().equalTo(mProduct.key);
-    query.addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override public void onDataChange(DataSnapshot dataSnapshot) {
-
-      }
-
-      @Override public void onCancelled(DatabaseError databaseError) {
-
-      }
-    });*/
-
     modifyProductObject();
-
     MyApplication.sProductsReference.child(mProduct.key)
         .setValue(mProduct, (databaseError, databaseReference) -> Toast.makeText(ProductActivity.this, "saved", Toast.LENGTH_SHORT).show());
   }
@@ -94,7 +88,48 @@ public class ProductActivity extends AppCompatActivity {
 
   // TODO
   public void showDialog(IPositiveDialog iPositiveDialog) {
+    new MaterialDialog.Builder(this).title("").content("").positiveText(R.string.yes).negativeText(R.string.no).show();
+  }
 
+  public void setOnPriceChangeListener() {
+    mPrice.addTextChangedListener(new TextWatcher() {
+      @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+      }
+
+      private String current = "";
+
+      @Override public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+        if (!s.toString().equals(current)) {
+          mPrice.removeTextChangedListener(this);
+
+          String currency = "zł ";
+          String cleanString = s.toString().replaceAll("[" + currency + ",.]", "");
+
+          double parsed = 0;
+          try {
+            parsed = Double.parseDouble(cleanString);
+          } catch (NumberFormatException e) {
+            Log.d(TAG, "onTextChanged: " + e.getMessage());
+          }
+          double priceDouble = parsed / 100;
+
+          //String formatted = NumberFormat.getCurrencyInstance().format(priceDouble);
+          String formatted = currency + String.format("%.2f", priceDouble);
+          ;
+
+          current = formatted;
+          mPrice.setText(formatted);
+          mPrice.setSelection(formatted.length());
+
+          mPrice.addTextChangedListener(this);
+        }
+      }
+
+      @Override public void afterTextChanged(Editable editable) {
+
+      }
+    });
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {

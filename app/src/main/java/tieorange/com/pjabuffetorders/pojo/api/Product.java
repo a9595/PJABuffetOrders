@@ -40,9 +40,14 @@ import org.parceler.Parcel;
     return productList;
   }
 
-  @Exclude public String getStringPrice() {
+  @Exclude public String getStringPriceWithZlote() {
     double priceDouble = getDoublePrice();
     return String.format("%.2f", priceDouble) + " zł";
+  }
+
+  @Exclude public String getStringPrice() {
+    double priceDouble = getDoublePrice();
+    return String.format("%.2f", priceDouble);
   }
 
   protected Object clone() throws CloneNotSupportedException {
