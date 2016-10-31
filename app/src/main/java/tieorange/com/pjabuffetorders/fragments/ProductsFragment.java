@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DatabaseReference;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.activities.Henson;
@@ -20,7 +19,6 @@ import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
 import tieorange.com.pjabuffetorders.activities.ui.ItemClickSupport;
 import tieorange.com.pjabuffetorders.activities.ui.ViewHolderProduct;
 import tieorange.com.pjabuffetorders.pojo.api.Product;
-import tieorange.com.pjabuffetorders.utils.Constants;
 
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 
@@ -79,19 +77,24 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
 
   private void initItemClickListener() {
     ItemClickSupport.addTo(mRecycler).setOnItemClickListener((recyclerView, position, v) -> {
-      Intent intent = Henson.with(getContext()).gotoProductActivity().mProduct(mAdapter.getItem(position)).build();
+      String key = mAdapter.getRef(position).getKey();
+      Product product = mAdapter.getItem(position);
+      product.key = key;
+      Intent intent = Henson.with(getContext()).gotoProductActivity().mProduct(product).build();
       startActivity(intent);
     });
   }
 
   private void initAdapter() {
-    DatabaseReference databaseReference = MyApplication.sFirebaseDatabase.getReference(Constants.PRODUCTS);
-    mAdapter =
-        new FirebaseRecyclerAdapter<Product, ViewHolderProduct>(Product.class, R.layout.item_menu, ViewHolderProduct.class, databaseReference) {
-          @Override protected void populateViewHolder(ViewHolderProduct viewHolder, Product model, int position) {
-            viewHolder.initProduct(model, getContext());
-          }
-        };
+
+    mAdapter = new FirebaseRecyclerAdapter<Product, ViewHolderProduct>(Product.class, R.layout.item_menu, ViewHolderProduct.class,
+        MyApplication.sProductsReference) {
+      @Override protected void populateViewHolder(ViewHolderProduct viewHolder, Product model, int position) {
+        //String key = getRef(position).getKey();
+        //model.key = key;
+        viewHolder.initProduct(model, getContext());
+      }
+    };
     mRecycler.setAdapter(mAdapter);
   }
 

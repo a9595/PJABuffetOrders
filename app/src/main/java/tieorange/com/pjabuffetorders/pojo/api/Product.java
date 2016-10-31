@@ -14,6 +14,7 @@ import org.parceler.Parcel;
   public int price;
   public int cookingTime;
   public String photoUrl;
+  @Exclude public String key;
 
   public Product() {
   }
@@ -24,7 +25,7 @@ import org.parceler.Parcel;
     this.cookingTime = cookingTime;
   }
 
-  private static int convertPriceDoubleToInt(double price) {
+  public static int convertPriceDoubleToInt(double price) {
     return (int) (price * 100);
   }
 
@@ -40,11 +41,15 @@ import org.parceler.Parcel;
   }
 
   @Exclude public String getStringPrice() {
-    double priceDouble = price / 100f;
+    double priceDouble = getDoublePrice();
     return String.format("%.2f", priceDouble) + " zł";
   }
 
   protected Object clone() throws CloneNotSupportedException {
     return super.clone();
+  }
+
+  public double getDoublePrice() {
+    return price / 100f;
   }
 }
