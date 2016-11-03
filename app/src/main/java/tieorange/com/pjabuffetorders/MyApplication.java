@@ -13,6 +13,7 @@ public class MyApplication extends Application {
 
   public static FirebaseDatabase sFirebaseDatabase;
   public static DatabaseReference sProductsReference;
+  public static DatabaseReference sOrdersReference;
 
   @Override public void onCreate() {
     super.onCreate();
@@ -22,6 +23,7 @@ public class MyApplication extends Application {
 
   private void initFirebase() {
     sFirebaseDatabase = FirebaseDatabase.getInstance();
-    sProductsReference = MyApplication.sFirebaseDatabase.getReference(Constants.PRODUCTS);
+    sProductsReference = sFirebaseDatabase.getReference(Constants.PRODUCTS);
+    sOrdersReference = sFirebaseDatabase.getReference(Constants.ORDERS);
   }
 }

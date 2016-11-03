@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import java.util.ArrayList;
+import java.util.List;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.activities.Henson;
@@ -29,6 +31,7 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
 
   @BindView(R.id.recycler) RecyclerView mRecycler;
   private FirebaseRecyclerAdapter<Product, ViewHolderProduct> mAdapter;
+  private List<Product> mProductsList = new ArrayList<>();
 
   public static ProductsFragment newInstance() {
     Bundle args = new Bundle();
@@ -51,7 +54,6 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     initRecycler();
-    initFirebase();
   }
 
   private void initRecycler() {
@@ -96,8 +98,5 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
       }
     };
     mRecycler.setAdapter(mAdapter);
-  }
-
-  private void initFirebase() {
   }
 }

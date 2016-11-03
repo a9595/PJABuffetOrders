@@ -57,7 +57,7 @@ public class ProductActivity extends AppCompatActivity {
 
   private void initViews() {
     mName.setText(mProduct.name);
-    String price = "zł " + String.valueOf(mProduct.getStringPrice());
+    String price = CURRENCY + String.valueOf(mProduct.getStringPrice());
     mPrice.setText(price);
     mTime.setText(String.valueOf(mProduct.cookingTime));
   }

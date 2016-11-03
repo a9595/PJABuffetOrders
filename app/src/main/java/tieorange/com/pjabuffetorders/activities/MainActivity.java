@@ -19,9 +19,11 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.fragments.OrdersFragment;
 import tieorange.com.pjabuffetorders.fragments.ProductsFragment;
+import tieorange.com.pjabuffetorders.pojo.api.Order;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     initFragments();
     initDrawer();
   }
+
+
 
   private void initFragments() {
     mProductsFragment = ProductsFragment.newInstance();
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         .withOnDrawerItemClickListener(getOnDrawerItemClickListener())
         .build();
 
-    mDrawerBuild.setSelection(itemProducts);
+    mDrawerBuild.setSelection(itemOrders);
   }
 
   @NonNull private Drawer.OnDrawerItemClickListener getOnDrawerItemClickListener() {
