@@ -1,6 +1,7 @@
 package tieorange.com.pjabuffetorders.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +14,9 @@ import butterknife.ButterKnife;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.activities.Henson;
 import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
+import tieorange.com.pjabuffetorders.activities.ui.ItemClickSupport;
 import tieorange.com.pjabuffetorders.activities.ui.ViewHolderOrder;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
 
@@ -53,6 +56,14 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
     int spacing = 20;
     //mRecycler.addItemDecoration(new SpacesItemDecoration(spacing, spacing, spacing, spacing));
     mRecycler.addItemDecoration(new GridItemSpacingDecorator(1, spacing));
+    ItemClickSupport.addTo(mRecycler).setOnItemClickListener((recyclerView, position, v) -> {
+      String key = mAdapter.getRef(position).getKey();
+      Order order = mAdapter.getItem(position);
+      order.key = key;
+      Intent intent = Henson.with(getContext()).gotoOrderActivity().mOrder(order).build();
+      startActivity(intent);
+    });
+
     initAdapter();
   }
 

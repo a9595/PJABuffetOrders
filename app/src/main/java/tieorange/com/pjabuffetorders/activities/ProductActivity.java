@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.f2prateek.dart.Dart;
+import com.f2prateek.dart.HensonNavigable;
 import com.f2prateek.dart.InjectExtra;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;

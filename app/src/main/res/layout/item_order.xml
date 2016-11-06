@@ -4,31 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:layout_height="80dp"
-    android:foreground="?attr/selectableItemBackground">
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    tools:layout_height="80dp">
 
 
   <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
       android:id="@+id/position"
-      tools:text="1."
-      tools:layout_constraintTop_creator="1"
-      app:layout_constraintTop_toTopOf="@+id/productsCount"
-      app:layout_constraintBottom_toBottomOf="@+id/productsCount"
-      android:layout_marginStart="16dp"
-      app:layout_constraintLeft_toLeftOf="parent"/>
-  <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:id="@+id/productsCount"
+      android:layout_marginStart="16dp"
+      app:layout_constraintBottom_toBottomOf="@+id/productsCount"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/productsCount"
       tools:layout_constraintTop_creator="1"
+      tools:text="1."/>
+  <TextView
+      android:id="@+id/productsCount"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="16dp"
       android:layout_marginStart="56dp"
       android:layout_marginTop="16dp"
-      tools:layout_constraintLeft_creator="1"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      android:layout_marginBottom="16dp"
+      tools:layout_constraintLeft_creator="1"
+      tools:layout_constraintTop_creator="1"
       tools:text="2 Products"/>
 </android.support.constraint.ConstraintLayout>

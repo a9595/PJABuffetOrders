@@ -100,4 +100,5 @@
   </string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
+  <string name="title_activity_order">OrderActivity</string>
 </resources>

@@ -23,7 +23,6 @@ import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.fragments.OrdersFragment;
 import tieorange.com.pjabuffetorders.fragments.ProductsFragment;
-import tieorange.com.pjabuffetorders.pojo.api.Order;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +45,16 @@ public class MainActivity extends AppCompatActivity {
     initDrawer();
   }
 
+  @Override protected void onResume() {
+    super.onResume();
+    //MyApplication.sFirebaseDatabase.goOnline();
+  }
 
+  @Override protected void onPause() {
+    this.finish();
+    //MyApplication.sFirebaseDatabase.goOffline();
+    super.onPause();
+  }
 
   private void initFragments() {
     mProductsFragment = ProductsFragment.newInstance();
