@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import butterknife.BindView;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
+import tieorange.com.pjabuffetorders.utils.Tools;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -26,7 +28,9 @@ public class OrderActivity extends AppCompatActivity {
   @BindView(R.id.reject) Button mReject;
   @BindView(R.id.content_order) ConstraintLayout mContentOrder;
   @BindView(R.id.fab) FloatingActionButton mFab;
+  @BindView(R.id.ready) Button mReady;
   private DatabaseReference mOrderRef;
+  private int mOrderStatus;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -42,11 +46,17 @@ public class OrderActivity extends AppCompatActivity {
   }
 
   @OnClick(R.id.accept) public void onClickAccept() {
-    acceptOrder();
+    //acceptOrder();
+    setOrderStatus(Order.STATE_ACCEPTED);
   }
 
   @OnClick(R.id.reject) public void onClickReject() {
-    rejectOrder();
+    //rejectOrder();
+    setOrderStatus(Order.STATE_REJECTED);
+  }
+
+  @OnClick(R.id.ready) public void onClickFinished() {
+    setOrderStatus(Order.STATE_READY);
   }
 
   private void initFirebase() {
@@ -83,5 +93,26 @@ public class OrderActivity extends AppCompatActivity {
   private void initFAB() {
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show());
+  }
+
+  public void setOrderStatus(int orderStatus) {
+    mOrder.status = orderStatus;
+    mOrderRef.setValue(mOrder, (databaseError, databaseReference) -> {
+      showMessage(orderStatus);
+
+      if (orderStatus == Order.STATE_ACCEPTED) {
+        Tools.setViewVisibility(mReady, View.VISIBLE);
+      }
+    });
+  }
+
+  private void showMessage(int orderStatus) {
+    String message = "ERROR";
+    if (orderStatus == Order.STATE_ACCEPTED) {
+      message = "ACCEPTED";
+    } else if (orderStatus == Order.STATE_READY) {
+      message = "READY";
+    }
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
   }
 }

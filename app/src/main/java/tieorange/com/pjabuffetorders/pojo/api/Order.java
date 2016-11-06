@@ -9,9 +9,11 @@ import org.parceler.Parcel;
  * Created by tieorange on 03/11/2016.
  */
 @Parcel public class Order {
-  public static final int STATE_ACCEPTED = 1;
-  public static final int STATE_READY = 2;
+  public static final int STATE_ORDERED = 1;
+  public static final int STATE_ACCEPTED = 2;
+  public static final int STATE_READY = 3;
   public static final int STATE_REJECTED = -1;
+
   public List<Product> products = new ArrayList<>();
   public String clientName;
   public int status;
