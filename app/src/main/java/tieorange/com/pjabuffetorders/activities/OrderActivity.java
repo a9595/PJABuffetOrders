@@ -147,4 +147,10 @@ public class OrderActivity extends AppCompatActivity {
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
+    }
 }
