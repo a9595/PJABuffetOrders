@@ -1,9 +1,9 @@
 package tieorange.com.pjabuffetorders.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +21,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.fragments.OrdersFragment;
 import tieorange.com.pjabuffetorders.fragments.ProductsFragment;
@@ -119,7 +118,9 @@ public class MainActivity extends SuperFirebaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_orders_history) {
+            Intent intent = Henson.with(this).gotoOrdersHistoryActivity().build();
+            startActivity(intent);
             return true;
         }
 

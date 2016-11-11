@@ -19,4 +19,10 @@ public class SuperFirebaseActivity extends AppCompatActivity {
         MyApplication.sFirebaseDatabase.goOffline();
         super.onPause();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

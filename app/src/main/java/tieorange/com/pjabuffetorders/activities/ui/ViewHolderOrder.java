@@ -14,17 +14,23 @@ import tieorange.com.pjabuffetorders.pojo.api.Order;
  */
 public class ViewHolderOrder extends RecyclerView.ViewHolder {
 
-  @BindView(R.id.position) TextView mPosition;
-  @BindView(R.id.productsCount) TextView mProductsCount;
+    @BindView(R.id.position)
+    TextView mPosition;
+    @BindView(R.id.productsCount)
+    TextView mProductsCount;
+    @BindView(R.id.status)
+    TextView mStatus;
 
-  public ViewHolderOrder(View itemView) {
-    super(itemView);
-    ButterKnife.bind(this, itemView);
-  }
+    public ViewHolderOrder(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
+    }
 
-  public void init(Order model, int position) {
-    mPosition.setText(String.valueOf(position + 1));
-    String productsCount = model.products.size() + " products";
-    mProductsCount.setText(productsCount);
-  }
+    public void init(Order model, int position) {
+        mPosition.setText(String.valueOf(position + 1));
+        String productsCount = model.products.size() + " products";
+        mProductsCount.setText(productsCount);
+        
+        mStatus.setText(model.getStatusString(mStatus.getContext()));
+    }
 }

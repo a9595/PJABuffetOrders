@@ -32,7 +32,11 @@
             android:name=".activities.OrderActivity"
             android:label="@string/title_activity_order"
             android:theme="@style/AppTheme.NoActionBar">
-
+        </activity>
+        <activity
+            android:name=".activities.OrdersHistoryActivity"
+            android:label="@string/title_activity_orders_history"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

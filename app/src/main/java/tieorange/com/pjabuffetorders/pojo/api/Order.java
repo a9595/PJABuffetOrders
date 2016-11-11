@@ -32,6 +32,7 @@ public class Order {
     public Order() {
     }
 
+    @Exclude
     public String getStatusString(Context context) {
         String statusNow = null;
         if (status == STATE_ACCEPTED) {
