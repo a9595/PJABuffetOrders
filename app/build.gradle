@@ -61,6 +61,9 @@ dependencies {
   compile 'com.github.BlacKCaT27:CurrencyEditText:v1.4.4'
   compile 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
 
+  compile 'blue.aodev:material-values:1.1.0'
+
+
 //  compile 'com.github.a9595:LibraryOrderList:-SNAPSHOT'
 //  compile project(path: ':OrderListLib')
   compile 'com.android.support:recyclerview-v7:25.0.0'

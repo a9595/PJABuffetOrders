@@ -26,7 +26,7 @@ import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.fragments.OrdersFragment;
 import tieorange.com.pjabuffetorders.fragments.ProductsFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends SuperFirebaseActivity {
 
     private static final int ID_PRODUCTS = 1;
     public static final int ID_ORDERS = 2;
@@ -48,18 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         initFragments();
         initDrawer();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MyApplication.sFirebaseDatabase.goOnline();
-    }
-
-    @Override
-    protected void onPause() {
-        MyApplication.sFirebaseDatabase.goOffline();
-        super.onPause();
     }
 
     private void initFragments() {

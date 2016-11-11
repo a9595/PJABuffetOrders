@@ -1,14 +1,13 @@
 package tieorange.com.pjabuffetorders.activities;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -26,7 +25,14 @@ import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
 import tieorange.com.pjabuffetorders.utils.Tools;
 
-public class OrderActivity extends AppCompatActivity {
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_ACCEPTED;
+import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_ORDERED;
+import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_READY;
+import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_REJECTED;
+
+public class OrderActivity extends SuperFirebaseActivity {
 
     @InjectExtra
     Order mOrder;
@@ -46,6 +52,8 @@ public class OrderActivity extends AppCompatActivity {
     RelativeLayout mButtonsLayout;
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
+    @BindView(R.id.pullToRefresh)
+    SwipeRefreshLayout mPullToRefresh;
     private DatabaseReference mOrderRef;
     private int mOrderStatus;
     private AdapterOrderItem mAdapter;
@@ -56,16 +64,52 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order);
         ButterKnife.bind(this);
         Dart.inject(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initViews();
         initFirebase();
     }
 
     private void initViews() {
+        initToolbar();
         initFAB();
+        refreshTopButtons();
         initRecycler();
+        initPullToRefresh();
+    }
+
+    private void initPullToRefresh() {
+        mPullToRefresh.setEnabled(false);
+        mPullToRefresh.setRefreshing(false);
+    }
+
+    private void refreshTopButtons() {
+        if (mOrder.status == STATE_ACCEPTED) {
+            Tools.setViewVisibility(mAccept, GONE);
+            Tools.setViewVisibility(mReady, VISIBLE);
+        } else if (mOrder.status == STATE_ORDERED) {
+            Tools.setViewVisibility(mAccept, VISIBLE);
+        } else if (mOrder.status == STATE_READY) {
+            Tools.setViewVisibility(mAccept, GONE);
+            Tools.setViewVisibility(mReady, GONE);
+        } else if (mOrder.status == STATE_REJECTED) {
+            Tools.setViewVisibility(mReject, GONE);
+            Tools.setViewVisibility(mAccept, VISIBLE);
+            Tools.setViewVisibility(mReady, GONE);
+        }
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(view -> {
+            onBackPressed();
+        });
+        refreshToolbar();
+    }
+
+    private void refreshToolbar() {
+        String title = mOrder.getStatusString(this);
+        setTitle("Order:    " + title);
     }
 
     private void initRecycler() {
@@ -76,50 +120,21 @@ public class OrderActivity extends AppCompatActivity {
 
     @OnClick(R.id.accept)
     public void onClickAccept() {
-        //acceptOrder();
-        setOrderStatus(Order.STATE_ACCEPTED);
+        setOrderStatus(STATE_ACCEPTED);
     }
 
     @OnClick(R.id.reject)
     public void onClickReject() {
-        //rejectOrder();
-        setOrderStatus(Order.STATE_REJECTED);
+        setOrderStatus(STATE_REJECTED);
     }
 
     @OnClick(R.id.ready)
     public void onClickFinished() {
-        setOrderStatus(Order.STATE_READY);
+        setOrderStatus(STATE_READY);
     }
 
     private void initFirebase() {
         mOrderRef = MyApplication.sOrdersReference.child(mOrder.key);
-    /*mOrderRef.addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override public void onDataChange(DataSnapshot dataSnapshot) {
-        Order value = dataSnapshot.getValue(Order.class);
-        value.status = Order.STATE_ACCEPTED;
-        acceptOrder(value);
-      }
-
-      @Override public void onCancelled(DatabaseError databaseError) {
-
-      }
-    });*/
-    }
-
-    private void acceptOrder() {
-        mOrder.status = Order.STATE_ACCEPTED;
-        mOrderRef.setValue(mOrder, (databaseError, databaseReference) -> {
-            // TODO: 06/11/2016 Handle errors
-            Toast.makeText(OrderActivity.this, "ACCEPTED", Toast.LENGTH_SHORT).show();
-        });
-    }
-
-    private void rejectOrder() {
-        mOrder.status = Order.STATE_REJECTED;
-        mOrderRef.setValue(mOrder, (databaseError, databaseReference) -> {
-            // TODO: 06/11/2016 Handle errors
-            Toast.makeText(OrderActivity.this, "REJECTED", Toast.LENGTH_SHORT).show();
-        });
     }
 
     private void initFAB() {
@@ -128,29 +143,25 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     public void setOrderStatus(int orderStatus) {
+        mPullToRefresh.setRefreshing(true);
         mOrder.status = orderStatus;
         mOrderRef.setValue(mOrder, (databaseError, databaseReference) -> {
             showMessage(orderStatus);
+            refreshTopButtons();
+            refreshToolbar();
 
-            if (orderStatus == Order.STATE_ACCEPTED) {
-                Tools.setViewVisibility(mReady, View.VISIBLE);
-            }
+            mPullToRefresh.setRefreshing(false);
         });
     }
 
     private void showMessage(int orderStatus) {
-        String message = "ERROR";
-        if (orderStatus == Order.STATE_ACCEPTED) {
-            message = "ACCEPTED";
-        } else if (orderStatus == Order.STATE_READY) {
-            message = "READY";
-        }
+        String message = mOrder.getStatusString(this);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
+        super.onBackPressed();
         finish();
     }
 }

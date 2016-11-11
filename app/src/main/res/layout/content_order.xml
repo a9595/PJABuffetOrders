@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_order"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="tieorange.com.pjabuffetorders.activities.OrderActivity"
-    tools:showIn="@layout/activity_order">
-
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/content_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="tieorange.com.pjabuffetorders.activities.OrderActivity"
+                tools:showIn="@layout/activity_order">
 
 
     <RelativeLayout
@@ -26,7 +25,7 @@
             android:backgroundTint="@color/md_red_400"
             android:drawableLeft="@drawable/ic_block_white_24dp"
             android:text="Reject"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/accept"
@@ -35,7 +34,7 @@
             android:backgroundTint="@color/md_green_400"
             android:drawableLeft="@drawable/ic_check_white_24dp"
             android:text="Accept"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/ready"
@@ -47,13 +46,20 @@
             android:text="ready"
             android:textColor="@color/white"
             android:visibility="gone"
-            tools:visibility="visible" />
+            tools:visibility="visible"/>
     </RelativeLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/buttonsLayout" />
+        android:layout_below="@id/buttonsLayout"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </RelativeLayout>
