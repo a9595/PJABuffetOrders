@@ -3,6 +3,7 @@ package tieorange.com.pjabuffetorders.activities.ui;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tieorange.com.pjabuffetorders.R;

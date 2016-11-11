@@ -2,6 +2,7 @@ package tieorange.com.pjabuffetorders.activities.ui;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import tieorange.com.pjabuffetorders.R;
 
 /**

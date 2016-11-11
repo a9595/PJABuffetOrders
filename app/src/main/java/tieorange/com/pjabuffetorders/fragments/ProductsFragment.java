@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.tieorange.orderlistlibrary.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 import tieorange.com.pjabuffetorders.MyApplication;
@@ -20,7 +22,6 @@ import tieorange.com.pjabuffetorders.activities.Henson;
 import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
 import tieorange.com.pjabuffetorders.activities.ui.ItemClickSupport;
 import tieorange.com.pjabuffetorders.activities.ui.ViewHolderProduct;
-import tieorange.com.pjabuffetorders.pojo.api.Product;
 
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 

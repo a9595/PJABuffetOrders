@@ -37,7 +37,7 @@ public class OrderActivity extends AppCompatActivity {
     @BindView(R.id.reject)
     Button mReject;
     @BindView(R.id.content_order)
-    ConstraintLayout mContentOrder;
+    RelativeLayout mContentOrder;
     @BindView(R.id.fab)
     FloatingActionButton mFab;
     @BindView(R.id.ready)
@@ -48,6 +48,7 @@ public class OrderActivity extends AppCompatActivity {
     RecyclerView mRecycler;
     private DatabaseReference mOrderRef;
     private int mOrderStatus;
+    private AdapterOrderItem mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,8 @@ public class OrderActivity extends AppCompatActivity {
 
     private void initRecycler() {
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
-//        mAccept = new AdapterOrderItem(this, mOrder.products);
+        mAdapter = new AdapterOrderItem(this, mOrder.products);
+        mRecycler.setAdapter(mAdapter);
     }
 
     @OnClick(R.id.accept)

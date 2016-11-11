@@ -14,16 +14,17 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.f2prateek.dart.Dart;
+import com.f2prateek.dart.InjectExtra;
+import com.tieorange.orderlistlibrary.Product;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.f2prateek.dart.Dart;
-import com.f2prateek.dart.HensonNavigable;
-import com.f2prateek.dart.InjectExtra;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
-import tieorange.com.pjabuffetorders.pojo.api.Product;
 import tieorange.com.pjabuffetorders.utils.interfaces.IPositiveDialog;
 
 public class ProductActivity extends AppCompatActivity {
@@ -31,7 +32,8 @@ public class ProductActivity extends AppCompatActivity {
   private static final String TAG = ProductActivity.class.getCanonicalName();
   @BindView(R.id.toolbar) Toolbar mToolbar;
   //@BindView(R.id.content_product) ConstraintLayout mContentProduct;
-  @InjectExtra Product mProduct;
+  @InjectExtra
+  Product mProduct;
   @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
   @BindView(R.id.app_bar) AppBarLayout mAppBar;
   @BindView(R.id.fab) FloatingActionButton mFab;
