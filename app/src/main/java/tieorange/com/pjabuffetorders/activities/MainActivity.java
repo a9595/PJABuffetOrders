@@ -59,7 +59,6 @@ public class MainActivity extends SuperFirebaseActivity {
     }
 
     private void initDrawer() {
-
         //if you want to update the items at a later time it is recommended to keep it in a variable
         SecondaryDrawerItem itemProducts =
                 new SecondaryDrawerItem().withIdentifier(ID_PRODUCTS).withName(R.string.products).withIcon(GoogleMaterial.Icon.gmd_local_pizza);
@@ -79,27 +78,24 @@ public class MainActivity extends SuperFirebaseActivity {
 
     @NonNull
     private Drawer.OnDrawerItemClickListener getOnDrawerItemClickListener() {
-        return new Drawer.OnDrawerItemClickListener() {
-            @Override
-            public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                int identifier = (int) drawerItem.getIdentifier();
-                switch (identifier) {
-                    case ID_ORDERS:
-                        setFragment(mOrdersFragment);
-                        setTitle(R.string.orders);
-                        break;
-                    case ID_PRODUCTS:
-                        setFragment(mProductsFragment);
-                        setTitle(R.string.products);
-                        break;
+        return (view, position, drawerItem) -> {
+            int identifier = (int) drawerItem.getIdentifier();
+            switch (identifier) {
+                case ID_ORDERS:
+                    setFragment(mOrdersFragment);
+                    setTitle(R.string.orders);
+                    break;
+                case ID_PRODUCTS:
+                    setFragment(mProductsFragment);
+                    setTitle(R.string.products);
+                    break;
 
-                    default:
-                        Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-
-                return true;
+                default:
+                    Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
+                    break;
             }
+
+            return true;
         };
     }
 

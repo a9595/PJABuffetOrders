@@ -6,4 +6,5 @@ package tieorange.com.pjabuffetorders.utils;
 public class Constants {
   public static final String PRODUCTS = "products";
   public static final String ORDERS = "orders";
+  public static final String STATUS = "status";
 }
