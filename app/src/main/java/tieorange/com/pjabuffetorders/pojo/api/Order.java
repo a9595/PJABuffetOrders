@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.content.ContextCompat;
 
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
 import com.tieorange.orderlistlibrary.Product;
 
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class Order {
     public int status;
     @Exclude
     public String key;
+
+    @Exclude
+    public int position;
 
     public Order() {
     }
