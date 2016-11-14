@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintTop_creator="1"
-            tools:text="2 Products"/>
+            tools:text='@{order.products.size() + " Products ordered" }'/>
 
         <TextView
             android:id="@+id/status"
@@ -54,6 +54,6 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toRightOf="@+id/productsCount"
             app:layout_constraintRight_toRightOf="parent"
-            tools:text="Ordered"/>
+            tools:text="dfd"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

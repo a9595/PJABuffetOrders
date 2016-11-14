@@ -82,15 +82,15 @@ public class OrderActivity extends SuperFirebaseActivity {
     }
 
     private void refreshTopButtons() {
-        if (mOrder.status == STATE_ACCEPTED) {
+        if (mOrder.getStatus() == STATE_ACCEPTED) {
             Tools.setViewVisibility(mAccept, GONE);
             Tools.setViewVisibility(mReady, VISIBLE);
-        } else if (mOrder.status == STATE_ORDERED) {
+        } else if (mOrder.getStatus() == STATE_ORDERED) {
             Tools.setViewVisibility(mAccept, VISIBLE);
-        } else if (mOrder.status == STATE_READY) {
+        } else if (mOrder.getStatus() == STATE_READY) {
             Tools.setViewVisibility(mAccept, GONE);
             Tools.setViewVisibility(mReady, GONE);
-        } else if (mOrder.status == STATE_REJECTED) {
+        } else if (mOrder.getStatus() == STATE_REJECTED) {
             Tools.setViewVisibility(mReject, GONE);
             Tools.setViewVisibility(mAccept, VISIBLE);
             Tools.setViewVisibility(mReady, GONE);
@@ -113,7 +113,7 @@ public class OrderActivity extends SuperFirebaseActivity {
 
     private void initRecycler() {
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new AdapterOrderItem(this, mOrder.products);
+        mAdapter = new AdapterOrderItem(this, mOrder.getProducts());
         mRecycler.setAdapter(mAdapter);
     }
 
@@ -133,7 +133,7 @@ public class OrderActivity extends SuperFirebaseActivity {
     }
 
     private void initFirebase() {
-        mOrderRef = MyApplication.sOrdersReference.child(mOrder.key);
+        mOrderRef = MyApplication.sOrdersReference.child(mOrder.getKey());
     }
 
     private void initFAB() {
@@ -143,7 +143,7 @@ public class OrderActivity extends SuperFirebaseActivity {
 
     public void setOrderStatus(int orderStatus) {
         mPullToRefresh.setRefreshing(true);
-        mOrder.status = orderStatus;
+        mOrder.setStatus(orderStatus);
         mOrderRef.setValue(mOrder, (databaseError, databaseReference) -> {
 //            showMessage();
             refreshTopButtons();

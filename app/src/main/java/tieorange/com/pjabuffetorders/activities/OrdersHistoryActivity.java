@@ -12,6 +12,7 @@ import com.f2prateek.dart.HensonNavigable;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
 
+import butterknife.ButterKnife;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.activities.ui.ViewHolderOrder;
@@ -38,7 +39,7 @@ public class OrdersHistoryActivity extends SuperFirebaseActivity {
         super.onCreate(savedInstanceState);
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_orders_history);
-//        ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
         initViews();
     }

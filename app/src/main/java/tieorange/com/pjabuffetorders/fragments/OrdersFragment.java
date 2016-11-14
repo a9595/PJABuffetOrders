@@ -2,7 +2,6 @@ package tieorange.com.pjabuffetorders.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -67,7 +66,7 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
         ItemClickSupport.addTo(mRecycler).setOnItemClickListener((recyclerView, position, v) -> {
             String key = mAdapter.getRef(position).getKey();
             Order order = mAdapter.getItem(position);
-            order.key = key;
+            order.setKey(key);
             Intent intent = Henson.with(getContext()).gotoOrderActivity().mOrder(order).build();
             startActivity(intent);
         });
@@ -80,9 +79,8 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
                 new FirebaseRecyclerAdapter<Order, ViewHolderOrder>(Order.class, R.layout.item_order, ViewHolderOrder.class, MyApplication.sOrdersReference) {
                     @Override
                     protected void populateViewHolder(ViewHolderOrder viewHolder, Order model, int position) {
-//            ItemOrderBinding binding =viewHolder
                         ItemOrderBinding binding = viewHolder.mBinding;
-                        model.position = position;
+                        model.setPosition(position);
                         binding.setOrder(model);
                         viewHolder.init(model, position);
                     }
