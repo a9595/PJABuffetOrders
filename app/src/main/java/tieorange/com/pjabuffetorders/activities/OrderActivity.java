@@ -107,7 +107,7 @@ public class OrderActivity extends SuperFirebaseActivity {
     }
 
     private void refreshToolbar() {
-        String title = mOrder.getStatusString(this);
+        String title = mOrder.getStatusString();
         setTitle("Order:    " + title);
     }
 
@@ -154,7 +154,7 @@ public class OrderActivity extends SuperFirebaseActivity {
     }
 
     private void showMessage() {
-        String message = mOrder.getStatusString(this);
+        String message = mOrder.getStatusString();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 

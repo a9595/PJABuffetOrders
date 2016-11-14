@@ -1,6 +1,5 @@
 package tieorange.com.pjabuffetorders.pojo.api;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
@@ -33,22 +32,41 @@ public class Order extends BaseObservable {
     @Exclude
     private int position;
 
+    @Exclude
+    private int textColor;
+
     public Order() {
     }
 
     @Exclude
-    public String getStatusString(Context context) {
+    public String getStatusString() {
         String statusNow = "NO STATE";
         if (getStatus() == STATE_ACCEPTED) {
-            statusNow = context.getString(R.string.status_accepted);
+            statusNow = "Accepted";
         } else if (getStatus() == STATE_ORDERED) {
-            statusNow = context.getString(R.string.status_ordered);
+            statusNow = "Ordered";
         } else if (getStatus() == STATE_READY) {
-            statusNow = context.getString(R.string.status_ready);
+            statusNow = "Ready";
         } else if (getStatus() == STATE_REJECTED) {
-            statusNow = context.getString(R.string.status_rejected);
+            statusNow = "Rejected";
         }
         return statusNow;
+    }
+
+    @Exclude
+    public void getExperiment(IStatesSwitch iStatesSwitch) {
+        String statusNow = "NO STATE";
+        if (getStatus() == STATE_ACCEPTED) {
+            iStatesSwitch.accepted();
+        } else if (getStatus() == STATE_ORDERED) {
+            iStatesSwitch.ordered();
+        } else if (getStatus() == STATE_READY) {
+            iStatesSwitch.ready();
+        } else {
+//        if (getStatus() == STATE_REJECTED) {
+            iStatesSwitch.rejected();
+        }
+//        return statusNow;
     }
 
     public String getKey() {
@@ -97,5 +115,43 @@ public class Order extends BaseObservable {
     public void setPosition(int position) {
         this.position = position;
         notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.position);
+    }
+
+    @Bindable
+    public int getTextColor() {
+        textColor = R.color.material_color_green_400;
+
+        getExperiment(new IStatesSwitch() {
+            @Override
+            public void ordered() {
+                textColor = R.color.material_color_yellow_800;
+            }
+
+            @Override
+            public void accepted() {
+                textColor = R.color.material_color_green_500;
+            }
+
+            @Override
+            public void ready() {
+                textColor = R.color.material_color_green_800;
+            }
+
+            @Override
+            public void rejected() {
+                textColor = R.color.material_color_red_500;
+            }
+        });
+        return textColor;
+    }
+
+    interface IStatesSwitch {
+        void ordered();
+
+        void accepted();
+
+        void ready();
+
+        void rejected();
     }
 }

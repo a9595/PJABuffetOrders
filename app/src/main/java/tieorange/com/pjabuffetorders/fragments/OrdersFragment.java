@@ -79,6 +79,12 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
                 new FirebaseRecyclerAdapter<Order, ViewHolderOrder>(Order.class, R.layout.item_order, ViewHolderOrder.class, MyApplication.sOrdersReference) {
                     @Override
                     protected void populateViewHolder(ViewHolderOrder viewHolder, Order model, int position) {
+                        boolean isNotShownOnList = model.getStatus() == Order.STATE_READY || model.getStatus() == Order.STATE_REJECTED;
+                        if (isNotShownOnList) {
+                            viewHolder.hide();
+                            return;
+                        }
+
                         ItemOrderBinding binding = viewHolder.mBinding;
                         model.setPosition(position);
                         binding.setOrder(model);
