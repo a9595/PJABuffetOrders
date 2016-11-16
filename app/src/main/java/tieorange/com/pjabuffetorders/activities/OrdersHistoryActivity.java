@@ -59,7 +59,7 @@ public class OrdersHistoryActivity extends SuperFirebaseActivity {
 
     private void initRecycler() {
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
-        Query query = MyApplication.sOrdersReference.orderByChild(Constants.STATUS).equalTo(Order.STATE_READY);
+        Query query = MyApplication.sOrdersReference.orderByChild(Constants.STATUS).equalTo(Order.STATE_ORDERED).equalTo(Order.STATE_ACCEPTED);
         mAdapter = new FirebaseRecyclerAdapter<Order, ViewHolderOrder>(Order.class, R.layout.item_order, ViewHolderOrder.class, query) {
             @Override
             protected void populateViewHolder(ViewHolderOrder viewHolder, Order model, int position) {
