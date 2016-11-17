@@ -19,7 +19,7 @@
                                                  tools:layout_height="80dp">
 
 
-        <TextView
+        <!--<TextView
             android:id="@+id/position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +56,6 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toRightOf="@+id/productsCount"
             app:layout_constraintRight_toRightOf="parent"
-            tools:text="@{order.getStatusString()}"/>
+            tools:text="@{order.getStatusString()}"/>-->
     </android.support.constraint.ConstraintLayout>
 </layout>

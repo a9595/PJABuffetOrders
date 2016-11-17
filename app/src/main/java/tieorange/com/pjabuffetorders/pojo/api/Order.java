@@ -4,7 +4,6 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
 import com.google.firebase.database.Exclude;
-import com.tieorange.orderlistlibrary.Product;
 
 import org.parceler.Parcel;
 
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
 /**
  * Created by tieorange on 03/11/2016.
@@ -84,7 +84,7 @@ public class Order extends BaseObservable {
 
     public void setProducts(List<Product> products) {
         this.products = products;
-        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.products);
+//        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.products);
     }
 
     @Bindable
@@ -94,7 +94,7 @@ public class Order extends BaseObservable {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
-        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.clientName);
+//        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.clientName);
     }
 
     @Bindable
@@ -104,7 +104,7 @@ public class Order extends BaseObservable {
 
     public void setStatus(int status) {
         this.status = status;
-        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.status);
+//        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.status);
     }
 
     @Bindable
@@ -114,7 +114,7 @@ public class Order extends BaseObservable {
 
     public void setPosition(int position) {
         this.position = position;
-        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.position);
+//        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.position);
     }
 
     @Bindable

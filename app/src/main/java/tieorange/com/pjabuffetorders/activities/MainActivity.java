@@ -115,8 +115,8 @@ public class MainActivity extends SuperFirebaseActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_orders_history) {
-            Intent intent = Henson.with(this).gotoOrdersHistoryActivity().build();
-            startActivity(intent);
+//            Intent intent = Henson.with(this).gotoOrdersHistoryActivity().build();
+//            startActivity(intent);
             return true;
         }
 

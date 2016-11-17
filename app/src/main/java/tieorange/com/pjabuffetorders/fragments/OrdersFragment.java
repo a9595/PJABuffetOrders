@@ -17,7 +17,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
-import tieorange.com.pjabuffetorders.activities.Henson;
 import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
 import tieorange.com.pjabuffetorders.activities.ui.ItemClickSupport;
 import tieorange.com.pjabuffetorders.activities.ui.ViewHolderOrder;
@@ -67,8 +66,8 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
             String key = mAdapter.getRef(position).getKey();
             Order order = mAdapter.getItem(position);
             order.setKey(key);
-            Intent intent = Henson.with(getContext()).gotoOrderActivity().mOrder(order).build();
-            startActivity(intent);
+//            Intent intent = Henson.with(getContext()).gotoOrderActivity().mOrder(order).build();
+//            startActivity(intent);
         });
 
         initAdapter();

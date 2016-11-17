@@ -18,13 +18,13 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.f2prateek.dart.Dart;
 import com.f2prateek.dart.InjectExtra;
-import com.tieorange.orderlistlibrary.Product;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.ordersListLib.Product;
 import tieorange.com.pjabuffetorders.utils.interfaces.IPositiveDialog;
 
 public class ProductActivity extends AppCompatActivity {

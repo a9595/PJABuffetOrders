@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tieorange.orderlistlibrary.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
 /**
  * Created by tieorange on 15/10/2016.

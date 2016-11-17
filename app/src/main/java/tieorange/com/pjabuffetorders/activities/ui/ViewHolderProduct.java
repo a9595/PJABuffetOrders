@@ -7,11 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tieorange.orderlistlibrary.Product;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
 /**
  * Created by tieorange on 29/10/2016.

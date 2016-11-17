@@ -9,19 +9,20 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.tieorange.orderlistlibrary.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
-import tieorange.com.pjabuffetorders.activities.Henson;
 import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
 import tieorange.com.pjabuffetorders.activities.ui.ItemClickSupport;
 import tieorange.com.pjabuffetorders.activities.ui.ViewHolderProduct;
+import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 
@@ -83,8 +84,8 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
       String key = mAdapter.getRef(position).getKey();
       Product product = mAdapter.getItem(position);
       product.key = key;
-      Intent intent = Henson.with(getContext()).gotoProductActivity().mProduct(product).build();
-      startActivity(intent);
+//      Intent intent = Henson.with(getContext()).gotoProductActivity().mProduct(product).build();
+//      startActivity(intent);
     });
   }
 

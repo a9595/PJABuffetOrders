@@ -14,13 +14,13 @@ import android.widget.Toast;
 import com.f2prateek.dart.Dart;
 import com.f2prateek.dart.InjectExtra;
 import com.google.firebase.database.DatabaseReference;
-import com.tieorange.orderlistlibrary.AdapterOrderItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.ordersListLib.AdapterOrderItem;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
 import tieorange.com.pjabuffetorders.utils.Tools;
 
