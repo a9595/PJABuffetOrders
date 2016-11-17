@@ -17,11 +17,13 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.activities.Henson;
 import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
 import tieorange.com.pjabuffetorders.activities.ui.ItemClickSupport;
 import tieorange.com.pjabuffetorders.activities.ui.ViewHolderOrder;
 import tieorange.com.pjabuffetorders.databinding.ItemOrderBinding;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
+import tieorange.com.pjabuffetorders.utils.Constants;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,24 +68,19 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
             String key = mAdapter.getRef(position).getKey();
             Order order = mAdapter.getItem(position);
             order.setKey(key);
-//            Intent intent = Henson.with(getContext()).gotoOrderActivity().mOrder(order).build();
-//            startActivity(intent);
+            Intent intent = Henson.with(getContext()).gotoOrderActivity().mOrder(order).build();
+            startActivity(intent);
         });
 
         initAdapter();
     }
 
     private void initAdapter() {
+//        MyApplication.sOrdersReference.orderByChild(Constants.STATUS).
         mAdapter =
                 new FirebaseRecyclerAdapter<Order, ViewHolderOrder>(Order.class, R.layout.item_order, ViewHolderOrder.class, MyApplication.sOrdersReference) {
                     @Override
                     protected void populateViewHolder(ViewHolderOrder viewHolder, Order model, int position) {
-                        boolean isNotShownOnList = model.getStatus() == Order.STATE_READY || model.getStatus() == Order.STATE_REJECTED;
-                        if (isNotShownOnList) {
-                            viewHolder.hide();
-                            return;
-                        }
-
                         ItemOrderBinding binding = viewHolder.mBinding;
                         model.setPosition(position);
                         binding.setOrder(model);

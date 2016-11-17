@@ -18,10 +18,10 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
  */
 @Parcel
 public class Order extends BaseObservable {
-    public static final int STATE_ORDERED = 1;
-    public static final int STATE_ACCEPTED = 2;
-    public static final int STATE_READY = 3;
-    public static final int STATE_REJECTED = -1;
+    public static final int STATE_ORDERED = 11;
+    public static final int STATE_ACCEPTED = 12;
+    public static final int STATE_READY = 21;
+    public static final int STATE_REJECTED = 22;
 
     private List<Product> products = new ArrayList<>();
     private String clientName;
@@ -84,7 +84,7 @@ public class Order extends BaseObservable {
 
     public void setProducts(List<Product> products) {
         this.products = products;
-//        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.products);
+        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.products);
     }
 
     @Bindable
@@ -94,7 +94,7 @@ public class Order extends BaseObservable {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
-//        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.clientName);
+        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.clientName);
     }
 
     @Bindable
@@ -104,7 +104,7 @@ public class Order extends BaseObservable {
 
     public void setStatus(int status) {
         this.status = status;
-//        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.status);
+        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.status);
     }
 
     @Bindable
@@ -114,7 +114,7 @@ public class Order extends BaseObservable {
 
     public void setPosition(int position) {
         this.position = position;
-//        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.position);
+        notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.position);
     }
 
     @Bindable
