@@ -18,14 +18,17 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
  */
 @Parcel
 public class Order extends BaseObservable {
-    public static final int STATE_ORDERED = 11;
-    public static final int STATE_ACCEPTED = 12;
-    public static final int STATE_READY = 21;
-    public static final int STATE_REJECTED = 22;
+    public static final String ORDERED_ORDERS_START_WITH = "1";
+    public static final String FINISHED_ORDERS_START_WITH = "2";
+
+    public static final String STATE_ORDERED = "11";
+    public static final String STATE_ACCEPTED = "12";
+    public static final String STATE_READY = "29";
+    public static final String STATE_REJECTED = "20";
 
     private List<Product> products = new ArrayList<>();
     private String clientName;
-    private int status;
+    private String status;
     @Exclude
     private String key;
 
@@ -98,11 +101,11 @@ public class Order extends BaseObservable {
     }
 
     @Bindable
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
         notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.status);
     }

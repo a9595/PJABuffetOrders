@@ -141,7 +141,7 @@ public class OrderActivity extends SuperFirebaseActivity {
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show());
     }
 
-    public void setOrderStatus(int orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         mPullToRefresh.setRefreshing(true);
         mOrder.setStatus(orderStatus);
         mOrderRef.setValue(mOrder, (databaseError, databaseReference) -> {
