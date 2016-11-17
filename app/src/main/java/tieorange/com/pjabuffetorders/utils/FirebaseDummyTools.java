@@ -3,10 +3,8 @@ package tieorange.com.pjabuffetorders.utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.ordersListLib.Product;
 import tieorange.com.pjabuffetorders.pojo.api.Order;

@@ -5,11 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.squareup.picasso.Picasso;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.ordersListLib.Product;
 

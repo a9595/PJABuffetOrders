@@ -30,15 +30,15 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
   @BindView(R.id.recycler) RecyclerView mRecycler;
   private FirebaseRecyclerAdapter<Order, ViewHolderOrder> mAdapter;
 
+  public OrdersFragment() {
+    // Required empty public constructor
+  }
+
   public static OrdersFragment newInstance() {
     Bundle args = new Bundle();
     OrdersFragment fragment = new OrdersFragment();
     fragment.setArguments(args);
     return fragment;
-  }
-
-  public OrdersFragment() {
-    // Required empty public constructor
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,

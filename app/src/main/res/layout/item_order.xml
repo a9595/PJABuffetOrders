@@ -1,61 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout >
 
-    <data>
+  <data >
 
-        <variable
-            name="order"
-            type="tieorange.com.pjabuffetorders.pojo.api.Order"/>
-    </data>
+    <variable
+        name="order"
+        type="tieorange.com.pjabuffetorders.pojo.api.Order"
+        />
+  </data >
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 xmlns:tools="http://schemas.android.com/tools"
-                                                 android:id="@+id/rootLayoutOrderItem"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="wrap_content"
-                                                 android:clickable="true"
-                                                 android:foreground="?attr/selectableItemBackground"
-                                                 tools:layout_height="80dp">
+  <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                               xmlns:app="http://schemas.android.com/apk/res-auto"
+                                               xmlns:tools="http://schemas.android.com/tools"
+                                               android:id="@+id/rootLayoutOrderItem"
+                                               android:layout_width="match_parent"
+                                               android:layout_height="wrap_content"
+                                               android:clickable="true"
+                                               android:foreground="?attr/selectableItemBackground"
+                                               tools:layout_height="80dp"
+      >
 
 
-        <TextView
-            android:id="@+id/position"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/productsCount"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/productsCount"
-            tools:layout_constraintTop_creator="1"
-            tools:text='@{order.position+1 + ". "}'/>
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/productsCount"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/productsCount"
+        tools:layout_constraintTop_creator="1"
+        tools:text='@{order.position+1 + ". "}'
+        />
 
-        <TextView
-            android:id="@+id/productsCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1"
-            tools:text='@{order.products.size() + " Products ordered" }'/>
+    <TextView
+        android:id="@+id/productsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1"
+        tools:text='@{order.products.size() + " Products ordered" }'
+        />
 
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:textColor="@{order.textColor}"
-            android:textStyle="italic"
-            app:layout_constraintBaseline_toBaselineOf="@+id/productsCount"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintLeft_toRightOf="@+id/productsCount"
-            app:layout_constraintRight_toRightOf="parent"
-            tools:text="@{order.getStatusString()}"/>
-    </android.support.constraint.ConstraintLayout>
-</layout>
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@{order.textColor}"
+        android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/productsCount"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toRightOf="@+id/productsCount"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="@{order.getStatusString()}"
+        />
+  </android.support.constraint.ConstraintLayout >
+</layout >

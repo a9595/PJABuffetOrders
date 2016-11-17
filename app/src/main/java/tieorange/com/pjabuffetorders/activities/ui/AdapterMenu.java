@@ -7,14 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
+import java.util.List;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
@@ -47,7 +44,10 @@ public class AdapterMenu extends RecyclerView.Adapter<AdapterMenu.ViewHolder> {
     holder.price.setText(product.getStringPriceWithZlote());
     String cookingTimeText = String.valueOf(product.cookingTime) + " min";
     holder.cookingTime.setText(cookingTimeText);
-    Picasso.with(mContext).load(product.photoUrl).placeholder(R.drawable.ic_pie_chart_outlined).into(holder.image);
+    Picasso.with(mContext)
+        .load(product.photoUrl)
+        .placeholder(R.drawable.ic_pie_chart_outlined)
+        .into(holder.image);
   }
 
   @Override public int getItemCount() {

@@ -2,7 +2,6 @@ package tieorange.com.pjabuffetorders.activities.ui;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import tieorange.com.pjabuffetorders.R;
 
 /**
@@ -25,25 +24,27 @@ public class ItemClickSupport {
     @Override public boolean onLongClick(View v) {
       if (mOnItemLongClickListener != null) {
         RecyclerView.ViewHolder holder = mRecyclerView.getChildViewHolder(v);
-        return mOnItemLongClickListener.onItemLongClicked(mRecyclerView, holder.getAdapterPosition(), v);
+        return mOnItemLongClickListener.onItemLongClicked(mRecyclerView,
+            holder.getAdapterPosition(), v);
       }
       return false;
     }
   };
-  private RecyclerView.OnChildAttachStateChangeListener mAttachListener = new RecyclerView.OnChildAttachStateChangeListener() {
-    @Override public void onChildViewAttachedToWindow(View view) {
-      if (mOnItemClickListener != null) {
-        view.setOnClickListener(mOnClickListener);
-      }
-      if (mOnItemLongClickListener != null) {
-        view.setOnLongClickListener(mOnLongClickListener);
-      }
-    }
+  private RecyclerView.OnChildAttachStateChangeListener mAttachListener =
+      new RecyclerView.OnChildAttachStateChangeListener() {
+        @Override public void onChildViewAttachedToWindow(View view) {
+          if (mOnItemClickListener != null) {
+            view.setOnClickListener(mOnClickListener);
+          }
+          if (mOnItemLongClickListener != null) {
+            view.setOnLongClickListener(mOnLongClickListener);
+          }
+        }
 
-    @Override public void onChildViewDetachedFromWindow(View view) {
+        @Override public void onChildViewDetachedFromWindow(View view) {
 
-    }
-  };
+        }
+      };
 
   private ItemClickSupport(RecyclerView recyclerView) {
     mRecyclerView = recyclerView;

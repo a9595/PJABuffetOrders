@@ -2,6 +2,7 @@ package tieorange.com.pjabuffetorders.pojo.api;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.os.Build;
 import com.google.firebase.database.Exclude;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,26 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
   @Exclude private int textColor;
 
   public Order() {
+  }
+
+  public boolean isCurrentUser() {
+    return clientName.equals(Build.MODEL);
+  }
+
+  public boolean isStatusAccepted() {
+    return status.equals(STATE_ACCEPTED);
+  }
+
+  public boolean isStatusReady() {
+    return status.equals(STATE_READY);
+  }
+
+  public boolean isStatusOrdered() {
+    return status.equals(STATE_ORDERED);
+  }
+
+  public boolean isStatusRejected() {
+    return status.equals(STATE_REJECTED);
   }
 
   @Exclude public String getStatusString() {

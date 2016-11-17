@@ -14,14 +14,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.f2prateek.dart.Dart;
-import com.f2prateek.dart.InjectExtra;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.f2prateek.dart.Dart;
+import com.f2prateek.dart.InjectExtra;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.ordersListLib.Product;
@@ -29,11 +27,11 @@ import tieorange.com.pjabuffetorders.utils.interfaces.IPositiveDialog;
 
 public class ProductActivity extends AppCompatActivity {
 
+  public static final String CURRENCY = "zł ";
   private static final String TAG = ProductActivity.class.getCanonicalName();
   @BindView(R.id.toolbar) Toolbar mToolbar;
   //@BindView(R.id.content_product) ConstraintLayout mContentProduct;
-  @InjectExtra
-  Product mProduct;
+  @InjectExtra Product mProduct;
   @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
   @BindView(R.id.app_bar) AppBarLayout mAppBar;
   @BindView(R.id.fab) FloatingActionButton mFab;
@@ -44,7 +42,6 @@ public class ProductActivity extends AppCompatActivity {
   @BindView(R.id.price) EditText mPrice;
   @BindView(R.id.time) EditText mTime;
   @BindView(R.id.content_product) ConstraintLayout mContentProduct;
-  public static final String CURRENCY = "zł ";
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -72,7 +69,9 @@ public class ProductActivity extends AppCompatActivity {
   private void saveDataToFirebase() {
     modifyProductObject();
     MyApplication.sProductsReference.child(mProduct.key)
-        .setValue(mProduct, (databaseError, databaseReference) -> Toast.makeText(ProductActivity.this, "saved", Toast.LENGTH_SHORT).show());
+        .setValue(mProduct,
+            (databaseError, databaseReference) -> Toast.makeText(ProductActivity.this, "saved",
+                Toast.LENGTH_SHORT).show());
   }
 
   private void modifyProductObject() {
@@ -93,16 +92,20 @@ public class ProductActivity extends AppCompatActivity {
 
   // TODO
   public void showDialog(IPositiveDialog iPositiveDialog) {
-    new MaterialDialog.Builder(this).title("").content("").positiveText(R.string.yes).negativeText(R.string.no).show();
+    new MaterialDialog.Builder(this).title("")
+        .content("")
+        .positiveText(R.string.yes)
+        .negativeText(R.string.no)
+        .show();
   }
 
   public void setOnPriceChangeListener() {
     mPrice.addTextChangedListener(new TextWatcher() {
+      private String current = "";
+
       @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
       }
-
-      private String current = "";
 
       @Override public void onTextChanged(CharSequence s, int i, int i1, int i2) {
         if (!s.toString().equals(current)) {

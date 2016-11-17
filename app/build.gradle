@@ -12,7 +12,6 @@ android {
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
   }
 
   buildTypes {
@@ -37,7 +36,7 @@ android {
     }
   }
 
-  dataBinding{
+  dataBinding {
     enabled true
   }
 }
@@ -82,12 +81,10 @@ dependencies {
   compile 'blue.aodev:material-values:1.1.0'
 
 
-//  compile 'com.github.a9595:LibraryOrderList:-SNAPSHOT'
-//  compile project(path: ':OrderListLib')
+  //  compile 'com.github.a9595:LibraryOrderList:-SNAPSHOT'
+  //  compile project(path: ':OrderListLib')
   compile 'com.android.support:recyclerview-v7:25.0.1'
   compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-
-
 }
 
 apply plugin: 'com.google.gms.google-services'
