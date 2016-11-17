@@ -1,6 +1,7 @@
 package tieorange.com.pjabuffetorders.activities;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,8 +38,7 @@ public class OrdersHistoryActivity extends SuperFirebaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_orders_history);
+        mBinding = DataBindingUtil.setContentView(OrdersHistoryActivity.this, R.layout.activity_orders_history);
         ButterKnife.bind(this);
 
         initViews();
