@@ -17,8 +17,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.f2prateek.dart.Dart;
 import com.f2prateek.dart.InjectExtra;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.databinding.ActivityOrderBinding;
@@ -131,6 +133,17 @@ public class OrderActivity extends SuperFirebaseActivity {
 
   private void initFirebase() {
     mOrderRef = MyApplication.sOrdersReference.child(mOrder.getKey());
+
+    mOrderRef.addValueEventListener(new ValueEventListener() {
+      @Override public void onDataChange(DataSnapshot dataSnapshot) {
+        mOrder = dataSnapshot.getValue(Order.class);
+        setOrderStatus(mOrder.getStatus());
+      }
+
+      @Override public void onCancelled(DatabaseError databaseError) {
+        Toast.makeText(OrderActivity.this, "onCancelled", Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   private void initFAB() {

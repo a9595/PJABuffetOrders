@@ -78,9 +78,7 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
         ViewHolderOrder.class, queryOrdersOrdered) {
       @Override
       protected void populateViewHolder(ViewHolderOrder viewHolder, Order model, int position) {
-        ItemOrderBinding binding = viewHolder.mBinding;
         model.setPosition(position);
-        binding.setOrder(model);
         viewHolder.init(model, position);
       }
     };
