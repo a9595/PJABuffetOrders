@@ -24,15 +24,17 @@ public class ViewHolderOrder extends RecyclerView.ViewHolder {
   }
 
   public void init(Order model, int position) {
-    mPosition.setText(String.valueOf(position + 1));
-    String productsCount = model.products.size() + " products";
-    mProductsCount.setText(productsCount);
+    model.setPosition(position);
+    mBinding.setOrder(model);
+    //mBinding.position.setText(String.valueOf(position + 1));
+    //String productsCount = model.products.size() + " products";
+    //mBinding.productsCount.setText(productsCount);
 
     checkIfHasSecretCode(model);
   }
 
   private void checkIfHasSecretCode(Order model) {
-    final String secretCode = model.secretCode;
+    final String secretCode = model.getSecretCode();
     if (!TextUtils.isEmpty(secretCode)) {
       mBinding.status.setText(secretCode);
     }

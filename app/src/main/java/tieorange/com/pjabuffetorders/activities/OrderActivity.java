@@ -1,5 +1,7 @@
 package tieorange.com.pjabuffetorders.activities;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,11 +17,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.f2prateek.dart.Dart;
 import com.f2prateek.dart.InjectExtra;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
+import tieorange.com.pjabuffetorders.databinding.ActivityOrderBinding;
+import tieorange.com.pjabuffetorders.databinding.ActivityOrdersHistoryBinding;
 import tieorange.com.pjabuffetorders.ordersListLib.AdapterOrderItem;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
+import tieorange.com.pjabuffetorders.utils.OrderTools;
 import tieorange.com.pjabuffetorders.utils.Tools;
 
 import static android.view.View.GONE;
@@ -47,9 +53,13 @@ public class OrderActivity extends SuperFirebaseActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_order);
+    final ActivityOrderBinding binding =
+        DataBindingUtil.setContentView(this, R.layout.activity_order);
+
     ButterKnife.bind(this);
     Dart.inject(this);
+
+    binding.contentOrder.setOrder(mOrder);
 
     initViews();
     initFirebase();
@@ -114,6 +124,9 @@ public class OrderActivity extends SuperFirebaseActivity {
 
   @OnClick(R.id.ready) public void onClickFinished() {
     setOrderStatus(STATE_READY);
+    OrderTools.setSecretCodeToFirebase(mOrder, (databaseError, databaseReference) -> {
+      // TODO: 18/11/2016 show secret code on UI:
+    });
   }
 
   private void initFirebase() {

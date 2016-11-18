@@ -28,12 +28,12 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
   public static final String FINISHED_ORDERS_START_WITH = STATE_READY.substring(0, 1);
   public static final String FINISHED_ORDERS_END_WITH = FINISHED_ORDERS_START_WITH + "\\uf8ff";
 
-  public List<Product> products = new ArrayList<>();
+  private List<Product> products = new ArrayList<>();
   private String clientName;
   private String status;
-  public String secretCode;
+  private String secretCode;
 
-  @Exclude private String key;
+  @Exclude public String key;
 
   @Exclude private int position;
 

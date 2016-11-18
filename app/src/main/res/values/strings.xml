@@ -100,10 +100,10 @@
   </string >
   <string name="yes" >Yes</string >
   <string name="no" >No</string >
-  <string name="title_activity_order" >OrderActivity</string >
+  <string name="title_activity_order" >Order</string >
   <string name="status_accepted" >Accepted</string >
   <string name="status_ordered" >Ordered</string >
   <string name="status_ready" >Ready</string >
   <string name="status_rejected" >Rejected</string >
-  <string name="title_activity_orders_history" >OrdersHistoryActivity</string >
+  <string name="title_activity_orders_history" >Orders History</string >
 </resources >
