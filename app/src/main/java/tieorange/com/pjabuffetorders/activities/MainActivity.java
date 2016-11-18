@@ -1,5 +1,6 @@
 package tieorange.com.pjabuffetorders.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -106,40 +107,16 @@ public class MainActivity extends SuperFirebaseActivity {
     // as you specify a parent activity in AndroidManifest.xml.
     int id = item.getItemId();
 
-    //noinspection SimplifiableIfStatement
     if (id == R.id.action_orders_history) {
-      //            Intent intent = Henson.with(this).gotoOrdersHistoryActivity().build();
-      //            startActivity(intent);
+      openOrdersHistoryActivity();
       return true;
     }
 
     return super.onOptionsItemSelected(item);
   }
 
-  public void writeToDatabase() {
-    // Write a message to the database
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
-
-    myRef.setValue("Hello, World!");
+  private void openOrdersHistoryActivity() {
+    Intent intent = Henson.with(this).gotoOrdersHistoryActivity().build();
+    startActivity(intent);
   }
-
-  //public void readFromDatabase(){
-  //  // Read from the database
-  //  myRef.addValueEventListener(new ValueEventListener() {
-  //    @Override
-  //    public void onDataChange(DataSnapshot dataSnapshot) {
-  //      // This method is called once with the initial value and again
-  //      // whenever data at this location is updated.
-  //      String value = dataSnapshot.getValue(String.class);
-  //      Log.d(TAG, "Value is: " + value);
-  //    }
-  //
-  //    @Override
-  //    public void onCancelled(DatabaseError error) {
-  //      // Failed to read value
-  //      Log.w(TAG, "Failed to read value.", error.toException());
-  //    }
-  //  });
-  //}
 }

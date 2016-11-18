@@ -14,4 +14,10 @@ public class FirebaseTools {
         .startAt(Order.ORDERED_ORDERS_START_WITH)
         .endAt(Order.ORDERED_ORDERS_ENDS_WITH);
   }
+
+  public static Query getQueryOrdersFinished() {
+    return MyApplication.sOrdersReference.orderByChild(Constants.STATUS)
+        .startAt(Order.FINISHED_ORDERS_START_WITH)
+        .endAt(Order.FINISHED_ORDERS_END_WITH);
+  }
 }

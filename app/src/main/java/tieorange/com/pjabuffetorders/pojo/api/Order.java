@@ -2,7 +2,10 @@ package tieorange.com.pjabuffetorders.pojo.api;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.Observable;
+import android.databinding.ObservableInt;
 import android.os.Build;
+import com.android.databinding.library.baseAdapters.BR;
 import com.google.firebase.database.Exclude;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +17,22 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
  * Created by tieorange on 03/11/2016.
  */
 @Parcel public class Order extends BaseObservable {
-  public static final String ORDERED_ORDERS_START_WITH = "3";
-  public static final String ORDERED_ORDERS_ENDS_WITH = ORDERED_ORDERS_START_WITH + "\\uf8ff";
-  public static final String FINISHED_ORDERS_START_WITH = "2";
 
   public static final String STATE_ORDERED = "39";
   public static final String STATE_ACCEPTED = "38";
   public static final String STATE_READY = "29";
   public static final String STATE_REJECTED = "20";
 
-  private List<Product> products = new ArrayList<>();
+  public static final String ORDERED_ORDERS_START_WITH = STATE_ORDERED.substring(0, 1);
+  public static final String ORDERED_ORDERS_ENDS_WITH = ORDERED_ORDERS_START_WITH + "\\uf8ff";
+  public static final String FINISHED_ORDERS_START_WITH = STATE_READY.substring(0, 1);
+  public static final String FINISHED_ORDERS_END_WITH = FINISHED_ORDERS_START_WITH + "\\uf8ff";
+
+  public List<Product> products = new ArrayList<>();
   private String clientName;
   private String status;
+  public String secretCode;
+
   @Exclude private String key;
 
   @Exclude private int position;
@@ -33,6 +40,7 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
   @Exclude private int textColor;
 
   public Order() {
+
   }
 
   public boolean isCurrentUser() {
@@ -149,6 +157,15 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
       }
     });
     return textColor;
+  }
+
+  @Bindable public String getSecretCode() {
+    return secretCode;
+  }
+
+  public void setSecretCode(String secretCode) {
+    this.secretCode = secretCode;
+    notifyPropertyChanged(BR.secretCode);
   }
 
   interface IStatesSwitch {

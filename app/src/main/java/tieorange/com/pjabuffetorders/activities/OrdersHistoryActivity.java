@@ -17,15 +17,12 @@ import tieorange.com.pjabuffetorders.activities.ui.ViewHolderOrder;
 import tieorange.com.pjabuffetorders.databinding.ActivityOrdersHistoryBinding;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
 import tieorange.com.pjabuffetorders.utils.Constants;
+import tieorange.com.pjabuffetorders.utils.FirebaseTools;
 
 @HensonNavigable public class OrdersHistoryActivity extends SuperFirebaseActivity {
 
-  //    @BindView(R.id.toolbar)
   Toolbar mToolbar;
-  //    @BindView(R.id.recycler)
   RecyclerView mRecycler;
-  //    @BindView(R.id.content_orders_history)
-  //    @BindView(R.id.fab)
   FloatingActionButton mFab;
   private FirebaseRecyclerAdapter<Order, ViewHolderOrder> mAdapter;
   private ActivityOrdersHistoryBinding mBinding;
@@ -34,7 +31,6 @@ import tieorange.com.pjabuffetorders.utils.Constants;
     super.onCreate(savedInstanceState);
     mBinding = DataBindingUtil.setContentView(OrdersHistoryActivity.this,
         R.layout.activity_orders_history);
-    ButterKnife.bind(this);
 
     initViews();
   }
@@ -54,9 +50,12 @@ import tieorange.com.pjabuffetorders.utils.Constants;
 
   private void initRecycler() {
     mRecycler.setLayoutManager(new LinearLayoutManager(this));
-    Query query = MyApplication.sOrdersReference.orderByChild(Constants.STATUS)
-        .equalTo(Order.STATE_ORDERED)
-        .equalTo(Order.STATE_ACCEPTED);
+    initAdapter();
+  }
+
+  private void initAdapter() {
+    Query query = FirebaseTools.getQueryOrdersFinished();
+
     mAdapter = new FirebaseRecyclerAdapter<Order, ViewHolderOrder>(Order.class, R.layout.item_order,
         ViewHolderOrder.class, query) {
       @Override

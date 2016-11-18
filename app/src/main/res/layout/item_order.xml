@@ -29,8 +29,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/productsCount"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/productsCount"
+        app:text='@{order.position+1 + ". "}'
         tools:layout_constraintTop_creator="1"
-        tools:text='@{order.position+1 + ". "}'
+        tools:text="1."
         />
 
     <TextView
@@ -43,9 +44,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:text='@{order.products.size() + " Products ordered" }'
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        tools:text='@{order.products.size() + " Products ordered" }'
+        tools:text="4 Products ordered"
         />
 
     <TextView
@@ -60,7 +62,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toRightOf="@+id/productsCount"
         app:layout_constraintRight_toRightOf="parent"
-        tools:text="@{order.getStatusString()}"
+        app:text="@{order.getStatusString()}"
+        tools:text="Ordered"
         />
   </android.support.constraint.ConstraintLayout >
 </layout >
