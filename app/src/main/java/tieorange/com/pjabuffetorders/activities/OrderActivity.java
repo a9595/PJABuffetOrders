@@ -21,6 +21,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.pusher.rest.Pusher;
+import java.util.Collections;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.databinding.ActivityOrderBinding;
@@ -65,6 +67,8 @@ public class OrderActivity extends SuperFirebaseActivity {
 
     initViews();
     initFirebase();
+
+    // TODO: 23/11/2016 5 person in line + time of waiting
   }
 
   private void initViews() {
@@ -124,11 +128,20 @@ public class OrderActivity extends SuperFirebaseActivity {
     setOrderStatus(STATE_REJECTED);
   }
 
-  @OnClick(R.id.ready) public void onClickFinished() {
+  @OnClick(R.id.ready) public void onClickReady() {
     setOrderStatus(STATE_READY);
     OrderTools.setSecretCodeToFirebase(mOrder, (databaseError, databaseReference) -> {
       // TODO: 18/11/2016 show secret code on UI:
+      sendNotification(mOrder);
     });
+  }
+
+  private void sendNotification(Order order) {
+    Pusher pusher = new Pusher("273441", "a53ab27b8c366f3151ff", "a628765f58d40fe822f0");
+    pusher.setCluster("eu");
+    pusher.setEncrypted(true);
+
+    pusher.trigger("test_channel", "my_event", Collections.singletonMap("message", "hello world"));
   }
 
   private void initFirebase() {
