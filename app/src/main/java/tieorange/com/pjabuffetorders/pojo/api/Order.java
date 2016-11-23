@@ -33,7 +33,7 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
   private String status;
   private String secretCode;
 
-  @Exclude public String key;
+  public String key;
 
   @Exclude private int position;
 

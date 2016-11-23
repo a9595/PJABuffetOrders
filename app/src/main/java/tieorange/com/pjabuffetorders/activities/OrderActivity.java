@@ -72,7 +72,7 @@ public class OrderActivity extends SuperFirebaseActivity {
     initFAB();
     refreshTopButtons();
     initRecycler();
-    initPullToRefresh();
+    //initPullToRefresh();
   }
 
   private void initPullToRefresh() {
@@ -134,16 +134,18 @@ public class OrderActivity extends SuperFirebaseActivity {
   private void initFirebase() {
     mOrderRef = MyApplication.sOrdersReference.child(mOrder.getKey());
 
-    mOrderRef.addValueEventListener(new ValueEventListener() {
+    /*mOrderRef.addValueEventListener(new ValueEventListener() {
       @Override public void onDataChange(DataSnapshot dataSnapshot) {
+        final String key = mOrder.getKey();
         mOrder = dataSnapshot.getValue(Order.class);
+        mOrder.key = key;
         setOrderStatus(mOrder.getStatus());
       }
 
       @Override public void onCancelled(DatabaseError databaseError) {
         Toast.makeText(OrderActivity.this, "onCancelled", Toast.LENGTH_SHORT).show();
       }
-    });
+    });*/
   }
 
   private void initFAB() {
@@ -155,14 +157,14 @@ public class OrderActivity extends SuperFirebaseActivity {
   }
 
   public void setOrderStatus(String orderStatus) {
-    mPullToRefresh.setRefreshing(true);
+    //mPullToRefresh.setRefreshing(true);
     mOrder.setStatus(orderStatus);
     mOrderRef.setValue(mOrder, (databaseError, databaseReference) -> {
       //            showMessage();
       refreshTopButtons();
       refreshToolbar();
 
-      mPullToRefresh.setRefreshing(false);
+      //mPullToRefresh.setRefreshing(false);
     });
   }
 
