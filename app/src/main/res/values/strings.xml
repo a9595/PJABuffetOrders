@@ -106,4 +106,5 @@
   <string name="status_ready" >Ready</string >
   <string name="status_rejected" >Rejected</string >
   <string name="title_activity_orders_history" >Orders History</string >
+  <string name="title_activity_main2" >Main2Activity</string >
 </resources >

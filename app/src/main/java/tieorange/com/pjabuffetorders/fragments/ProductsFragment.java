@@ -29,7 +29,6 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
 
   @BindView(R.id.recycler) RecyclerView mRecycler;
   private FirebaseRecyclerAdapter<Product, ViewHolderProduct> mAdapter;
-  private List<Product> mProductsList = new ArrayList<>();
 
   public ProductsFragment() {
     // Required empty public constructor

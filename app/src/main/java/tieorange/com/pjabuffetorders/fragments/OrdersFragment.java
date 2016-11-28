@@ -9,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
+import org.w3c.dom.Text;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.activities.Henson;
 import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
@@ -28,6 +30,7 @@ import tieorange.com.pjabuffetorders.utils.FirebaseTools;
 public class OrdersFragment extends android.support.v4.app.Fragment {
 
   @BindView(R.id.recycler) RecyclerView mRecycler;
+  @BindView(R.id.noOrdersYet) TextView mNoOrdersYet;
   private FirebaseRecyclerAdapter<Order, ViewHolderOrder> mAdapter;
 
   public OrdersFragment() {
@@ -80,6 +83,8 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
       protected void populateViewHolder(ViewHolderOrder viewHolder, Order model, int position) {
         model.setPosition(position);
         viewHolder.init(model, position);
+
+        mNoOrdersYet.setVisibility(View.GONE);
       }
     };
 
