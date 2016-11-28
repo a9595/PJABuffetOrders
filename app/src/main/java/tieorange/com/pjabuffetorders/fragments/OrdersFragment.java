@@ -84,7 +84,12 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
         model.setPosition(position);
         viewHolder.init(model, position);
 
-        mNoOrdersYet.setVisibility(View.GONE);
+        // Check "no orders yet":
+        //if (mAdapter.getItemCount() > 0) {
+        //  mNoOrdersYet.setVisibility(View.VISIBLE);
+        //} else {
+          mNoOrdersYet.setVisibility(View.GONE);
+        //}
       }
     };
 
