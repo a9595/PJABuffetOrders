@@ -25,6 +25,7 @@ public class AdapterOrderItem extends RecyclerView.Adapter<AdapterOrderItem.View
   public AdapterOrderItem(Context context, Order order) {
     mContext = context;
     mOrder = order;
+    mOrder.productsCart.convertProductsFromFirebase();
   }
 
   @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,9 +41,6 @@ public class AdapterOrderItem extends RecyclerView.Adapter<AdapterOrderItem.View
 
     holder.name.setText(product.name);
     holder.price.setText(product.getStringPrice());
-    holder.position.setText(position + 1 + ". ");
-    holder.status.setText(mOrder.secretCode == null ? mOrder.getStatusString() : mOrder.secretCode);
-    holder.productsCount.setText(mOrder.productsCart.size() + " Products ordered");
 
     // TODO: 08/12/2016 Amount
   }
@@ -54,9 +52,6 @@ public class AdapterOrderItem extends RecyclerView.Adapter<AdapterOrderItem.View
   public static class ViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.itemName) public TextView name;
     @BindView(R.id.itemPrice) TextView price;
-    @BindView(R.id.position) TextView position;
-    @BindView(R.id.status) TextView status;
-    @BindView(R.id.productsCount) TextView productsCount;
 
     public ViewHolder(View itemView) {
       super(itemView);
