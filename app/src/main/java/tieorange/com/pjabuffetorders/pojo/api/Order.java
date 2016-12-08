@@ -2,16 +2,11 @@ package tieorange.com.pjabuffetorders.pojo.api;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.Observable;
-import android.databinding.ObservableInt;
 import android.os.Build;
-import com.android.databinding.library.baseAdapters.BR;
 import com.google.firebase.database.Exclude;
-import java.util.ArrayList;
-import java.util.List;
 import org.parceler.Parcel;
 import tieorange.com.pjabuffetorders.R;
-import tieorange.com.pjabuffetorders.ordersListLib.Product;
+import tieorange.com.pjabuffetorders.utils.CartTools;
 
 /**
  * Created by tieorange on 03/11/2016.
@@ -28,19 +23,17 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
   public static final String FINISHED_ORDERS_START_WITH = STATE_READY.substring(0, 1);
   public static final String FINISHED_ORDERS_END_WITH = FINISHED_ORDERS_START_WITH + "\\uf8ff";
 
-  private List<Product> products = new ArrayList<>();
-  private String clientName;
-  private String status;
-  private String secretCode;
-
-  public String key;
+  public Cart productsCart = new Cart();
+  public String clientName;
+  public String status;
+  public String secretCode;
+  @Exclude public String key;
 
   @Exclude private int position;
 
   @Exclude private int textColor;
 
   public Order() {
-
   }
 
   public boolean isCurrentUser() {
@@ -100,13 +93,13 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
     this.key = key;
   }
 
-  @Bindable public List<Product> getProducts() {
-    return products;
+  @Bindable public Cart getProductsCart() {
+    return productsCart;
   }
 
-  public void setProducts(List<Product> products) {
-    this.products = products;
-    notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.products);
+  public void setProductsCart(Cart productsCart) {
+    this.productsCart = productsCart;
+    //notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.products);
   }
 
   @Bindable public String getClientName() {
@@ -115,7 +108,7 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
   public void setClientName(String clientName) {
     this.clientName = clientName;
-    notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.clientName);
+    //notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.clientName);
   }
 
   @Bindable public String getStatus() {
@@ -124,7 +117,7 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
   public void setStatus(String status) {
     this.status = status;
-    notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.status);
+    //notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.status);
   }
 
   @Bindable public int getPosition() {
@@ -133,7 +126,7 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
   public void setPosition(int position) {
     this.position = position;
-    notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.position);
+    //notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.position);
   }
 
   @Bindable public int getTextColor() {
@@ -165,7 +158,7 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
 
   public void setSecretCode(String secretCode) {
     this.secretCode = secretCode;
-    notifyPropertyChanged(BR.secretCode);
+    //notifyPropertyChanged(BR.secretCode);
   }
 
   interface IStatesSwitch {
@@ -176,5 +169,10 @@ import tieorange.com.pjabuffetorders.ordersListLib.Product;
     void ready();
 
     void rejected();
+  }
+
+  public int getSumOfTimeToWait() {
+
+    return CartTools.getSumOfTimeToWait(productsCart);
   }
 }

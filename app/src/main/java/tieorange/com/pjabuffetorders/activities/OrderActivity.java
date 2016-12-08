@@ -1,7 +1,6 @@
 package tieorange.com.pjabuffetorders.activities;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,16 +16,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.f2prateek.dart.Dart;
 import com.f2prateek.dart.InjectExtra;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 //import com.pusher.rest.Pusher;
-import java.util.Collections;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.databinding.ActivityOrderBinding;
-import tieorange.com.pjabuffetorders.databinding.ActivityOrdersHistoryBinding;
 import tieorange.com.pjabuffetorders.ordersListLib.AdapterOrderItem;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
 import tieorange.com.pjabuffetorders.utils.OrderTools;
@@ -116,7 +110,7 @@ public class OrderActivity extends SuperFirebaseActivity {
 
   private void initRecycler() {
     mRecycler.setLayoutManager(new LinearLayoutManager(this));
-    mAdapter = new AdapterOrderItem(this, mOrder.getProducts());
+    mAdapter = new AdapterOrderItem(this, mOrder.getProductsCart());
     mRecycler.setAdapter(mAdapter);
   }
 

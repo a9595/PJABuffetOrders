@@ -58,6 +58,11 @@ import org.parceler.Parcel;
     return price / 100f;
   }
 
+  public static double convertIntToDoublePrice(int result) {
+    return result / 100f;
+  }
+
+
 
 
     /*//region Parcel

@@ -37,8 +37,8 @@ public class FirebaseDummyTools {
   private void finishAddingDummyOrder(List<Product> productsList) {
     Order order = new Order();
     order.setClientName("Andrii");
-    order.getProducts().add(productsList.get(0));
-    order.getProducts().add(productsList.get(1));
+    order.getProductsCart().add(productsList.get(0));
+    order.getProductsCart().add(productsList.get(1));
 
     MyApplication.sOrdersReference.push().setValue(order);
   }
