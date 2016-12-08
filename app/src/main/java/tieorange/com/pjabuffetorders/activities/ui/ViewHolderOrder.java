@@ -1,10 +1,12 @@
 package tieorange.com.pjabuffetorders.activities.ui;
 
-import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
 
 /**
@@ -12,21 +14,20 @@ import tieorange.com.pjabuffetorders.pojo.api.Order;
  */
 public class ViewHolderOrder extends RecyclerView.ViewHolder {
 
-  TextView mPosition;
-  TextView mProductsCount;
-  TextView mStatus;
+  @BindView(R.id.position) TextView mPosition;
+  @BindView(R.id.productsCount) TextView mProductsCount;
+  @BindView(R.id.status) TextView mStatus;
 
   public ViewHolderOrder(View itemView) {
     super(itemView);
-    //mBinding = DataBindingUtil.bind(itemView);
+    ButterKnife.bind(this, itemView);
   }
 
   public void init(Order model, int position) {
     model.setPosition(position);
-    //mBinding.setOrder(model);
-    //mBinding.position.setText(String.valueOf(position + 1));
-    //String productsCount = model.products.size() + " products";
-    //mBinding.productsCount.setText(productsCount);
+    mPosition.setText(String.valueOf(position + 1));
+    String productsCount = model.productsCart.size() + " products";
+    mProductsCount.setText(productsCount);
 
     checkIfHasSecretCode(model);
   }
