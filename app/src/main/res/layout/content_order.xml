@@ -1,107 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout >
-  <data >
-    <variable
-        name="order"
-        type="tieorange.com.pjabuffetorders.pojo.api.Order"
-        />
-    <import type="android.view.View" />
-  </data >
-  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto"
-                  xmlns:tools="http://schemas.android.com/tools"
-                  android:id="@+id/content_order"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                  tools:context="tieorange.com.pjabuffetorders.activities.OrderActivity"
-                  tools:showIn="@layout/activity_order"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/content_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="tieorange.com.pjabuffetorders.activities.OrderActivity"
+                tools:showIn="@layout/activity_order"
+    >
+
+
+  <RelativeLayout
+      android:id="@+id/buttonsLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
       >
 
-
-    <RelativeLayout
-        android:id="@+id/buttonsLayout"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/reject"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        >
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/ready"
+        android:backgroundTint="@color/md_red_400"
+        android:drawableLeft="@drawable/ic_block_white_24dp"
+        android:text="Reject"
+        android:textColor="@color/white"
+        />
 
-      <Button
-          android:id="@+id/reject"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentEnd="true"
-          android:layout_alignParentTop="true"
-          android:layout_below="@+id/ready"
-          android:backgroundTint="@color/md_red_400"
-          android:drawableLeft="@drawable/ic_block_white_24dp"
-          android:text="Reject"
-          android:textColor="@color/white"
-          />
-
-      <Button
-          android:id="@+id/accept"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:backgroundTint="@color/md_green_400"
-          android:drawableLeft="@drawable/ic_check_white_24dp"
-          android:text="Accept"
-          android:textColor="@color/white"
-          />
-
-      <Button
-          android:id="@+id/ready"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentTop="true"
-          android:layout_toRightOf="@id/accept"
-          android:backgroundTint="@color/md_green_A400"
-          android:text="ready"
-          android:textColor="@color/white"
-          android:visibility="gone"
-          tools:visibility="visible"
-          />
-    </RelativeLayout >
-
-    <RelativeLayout
-        android:id="@+id/secretCodeLayout"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonsLayout"
-        android:visibility="@{order.secretCode == null ? View.GONE: View.VISIBLE}"
-        >
-      <TextView
-          android:id="@+id/secretCode"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerInParent="true"
-          android:text="@{order.secretCode}"
-          android:textSize="20dp"
-          android:textStyle="bold"
-          tools:text="C34"
-          />
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignBaseline="@id/secretCode"
-          android:layout_toLeftOf="@id/secretCode"
-          android:text="Secret code: "
-          />
-    </RelativeLayout >
+        android:backgroundTint="@color/md_green_400"
+        android:drawableLeft="@drawable/ic_check_white_24dp"
+        android:text="Accept"
+        android:textColor="@color/white"
+        />
+
+    <Button
+        android:id="@+id/ready"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/accept"
+        android:backgroundTint="@color/md_green_A400"
+        android:text="ready"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+  </RelativeLayout >
+
+  <RelativeLayout
+      android:id="@+id/secretCodeLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/buttonsLayout"
+      android:visibility="gone"
+      >
+    <TextView
+        android:id="@+id/secretCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        tools:text="C34"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/secretCode"
+        android:layout_toLeftOf="@id/secretCode"
+        android:text="Secret code: "
+        />
+  </RelativeLayout >
 
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/pullToRefresh"
+  <android.support.v4.widget.SwipeRefreshLayout
+      android:id="@+id/pullToRefresh"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/secretCodeLayout"
+      >
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/secretCodeLayout"
-        >
+        />
+  </android.support.v4.widget.SwipeRefreshLayout >
 
-      <android.support.v7.widget.RecyclerView
-          android:id="@+id/recycler"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          />
-    </android.support.v4.widget.SwipeRefreshLayout >
-
-  </RelativeLayout >
-</layout >
+</RelativeLayout >

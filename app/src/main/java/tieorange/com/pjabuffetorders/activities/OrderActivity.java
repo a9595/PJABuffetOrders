@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +45,9 @@ public class OrderActivity extends SuperFirebaseActivity {
   @BindView(R.id.buttonsLayout) RelativeLayout mButtonsLayout;
   @BindView(R.id.recycler) RecyclerView mRecycler;
   @BindView(R.id.pullToRefresh) SwipeRefreshLayout mPullToRefresh;
+  @BindView(R.id.secretCodeLayout) RelativeLayout mSecretCodeLayout;
+  @BindView(R.id.secretCode) TextView mSecretCode;
+
   private DatabaseReference mOrderRef;
   private int mOrderStatus;
   private AdapterOrderItem mAdapter;
@@ -121,7 +125,8 @@ public class OrderActivity extends SuperFirebaseActivity {
   @OnClick(R.id.ready) public void onClickReady() {
     setOrderStatus(STATE_READY);
     OrderTools.setSecretCodeToFirebase(mOrder, (databaseError, databaseReference) -> {
-      // TODO: 18/11/2016 show secret code on UI:
+      mSecretCodeLayout.setVisibility(VISIBLE);
+      mSecretCode.setText(mOrder.secretCode);
     });
   }
 
