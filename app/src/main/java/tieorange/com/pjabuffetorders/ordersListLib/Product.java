@@ -15,6 +15,7 @@ import org.parceler.Parcel;
   public int cookingTime;
   public String photoUrl;
   @Exclude public String key;
+  public Integer amount;
 
   public Product() {
   }
