@@ -24,6 +24,8 @@ public class ViewHolderOrder extends RecyclerView.ViewHolder {
   }
 
   public void init(Order model, int position) {
+    model.productsCart.convertProductsFromFirebase();
+
     model.setPosition(position);
     mPosition.setText(String.valueOf(position + 1));
     String productsCount = model.productsCart.size() + " products";

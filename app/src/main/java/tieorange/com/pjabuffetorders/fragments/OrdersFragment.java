@@ -79,7 +79,6 @@ public class OrdersFragment extends android.support.v4.app.Fragment {
         ViewHolderOrder.class, queryOrdersOrdered) {
       @Override
       protected void populateViewHolder(ViewHolderOrder viewHolder, Order model, int position) {
-        model.productsCart.convertProductsFromFirebase();
         model.setPosition(position);
         viewHolder.init(model, position);
 

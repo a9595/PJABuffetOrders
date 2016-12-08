@@ -6,6 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.RelativeLayout;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.f2prateek.dart.HensonNavigable;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
@@ -16,30 +19,24 @@ import tieorange.com.pjabuffetorders.utils.FirebaseTools;
 
 @HensonNavigable public class OrdersHistoryActivity extends SuperFirebaseActivity {
 
-  Toolbar mToolbar;
-  RecyclerView mRecycler;
-  FloatingActionButton mFab;
+  @BindView(R.id.toolbar) Toolbar mToolbar;
+  @BindView(R.id.recycler) RecyclerView mRecycler;
+  @BindView(R.id.content_orders_history) RelativeLayout mContentOrdersHistory;
+  @BindView(R.id.fab) FloatingActionButton mFab;
   private FirebaseRecyclerAdapter<Order, ViewHolderOrder> mAdapter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_orders_history);
+    ButterKnife.bind(this);
 
     initViews();
   }
 
   private void initViews() {
-    bindViewToFields();
     initToolbar();
     initFAB();
     initRecycler();
-  }
-
-  private void bindViewToFields() {
-    // TODO: 08/12/2016  
-    //mToolbar = mBinding.toolbar;
-    //mRecycler = mBinding.contentOrdersHistory.recycler;
-    //mFab = mBinding.fab;
   }
 
   private void initRecycler() {

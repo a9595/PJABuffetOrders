@@ -29,7 +29,8 @@ public class AdapterOrderItem extends RecyclerView.Adapter<AdapterOrderItem.View
   }
 
   @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(mContext).inflate(R.layout.item_order_library, parent, false);
+    View view =
+        LayoutInflater.from(mContext).inflate(R.layout.item_product_in_order, parent, false);
     return new ViewHolder(view);
   }
 
@@ -37,10 +38,11 @@ public class AdapterOrderItem extends RecyclerView.Adapter<AdapterOrderItem.View
     final Pair<Product, Integer> entry = CartTools.getEntry(position, mOrder.productsCart);
 
     Product product = entry.first;
-    final Integer amount = entry.second;
+    final String amount = String.valueOf(entry.second);
 
     holder.name.setText(product.name);
     holder.price.setText(product.getStringPrice());
+    holder.amount.setText(amount);
 
     // TODO: 08/12/2016 Amount
   }
@@ -52,6 +54,7 @@ public class AdapterOrderItem extends RecyclerView.Adapter<AdapterOrderItem.View
   public static class ViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.itemName) public TextView name;
     @BindView(R.id.itemPrice) TextView price;
+    @BindView(R.id.amount) TextView amount;
 
     public ViewHolder(View itemView) {
       super(itemView);
