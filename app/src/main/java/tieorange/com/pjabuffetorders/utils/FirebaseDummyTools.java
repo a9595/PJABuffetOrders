@@ -15,7 +15,7 @@ import tieorange.com.pjabuffetorders.pojo.api.Order;
 
 public class FirebaseDummyTools {
 
-  private void addDummyOrder() {
+  /*private void addDummyOrder() {
     MyApplication.sProductsReference.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override public void onDataChange(DataSnapshot dataSnapshot) {
         List<Product> productsList = new ArrayList<Product>();
@@ -41,5 +41,5 @@ public class FirebaseDummyTools {
     order.getProductsCart().add(productsList.get(1));
 
     MyApplication.sOrdersReference.push().setValue(order);
-  }
+  }*/
 }

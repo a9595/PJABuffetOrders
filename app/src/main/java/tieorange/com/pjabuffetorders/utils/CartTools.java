@@ -1,7 +1,5 @@
 package tieorange.com.pjabuffetorders.utils;
 
-<<<<<<< Updated upstream
-=======
 import android.util.Pair;
 import java.util.ArrayList;
 import java.util.Map;
@@ -9,14 +7,6 @@ import java.util.Set;
 import tieorange.com.pjabuffetorders.ordersListLib.Product;
 import tieorange.com.pjabuffetorders.pojo.api.Cart;
 
->>>>>>> Stashed changes
-/**
- * Created by tieorange on 08/12/2016.
- */
-
-<<<<<<< Updated upstream
-class CartTools {
-=======
 public class CartTools {
 
   public static void setCurrentAmount(int amount, Product product, Cart cart) {
@@ -130,5 +120,4 @@ public class CartTools {
     }
     return resultSum;
   }
->>>>>>> Stashed changes
 }

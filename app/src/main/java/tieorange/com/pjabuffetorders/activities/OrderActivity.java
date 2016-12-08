@@ -1,6 +1,5 @@
 package tieorange.com.pjabuffetorders.activities;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,10 +16,8 @@ import butterknife.OnClick;
 import com.f2prateek.dart.Dart;
 import com.f2prateek.dart.InjectExtra;
 import com.google.firebase.database.DatabaseReference;
-//import com.pusher.rest.Pusher;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
-import tieorange.com.pjabuffetorders.databinding.ActivityOrderBinding;
 import tieorange.com.pjabuffetorders.ordersListLib.AdapterOrderItem;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
 import tieorange.com.pjabuffetorders.utils.OrderTools;
@@ -32,6 +29,8 @@ import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_ACCEPTED;
 import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_ORDERED;
 import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_READY;
 import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_REJECTED;
+
+//import com.pusher.rest.Pusher;
 
 public class OrderActivity extends SuperFirebaseActivity {
 
@@ -51,13 +50,10 @@ public class OrderActivity extends SuperFirebaseActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    final ActivityOrderBinding binding =
-        DataBindingUtil.setContentView(this, R.layout.activity_order);
+    setContentView(R.layout.activity_order);
 
     ButterKnife.bind(this);
     Dart.inject(this);
-
-    binding.contentOrder.setOrder(mOrder);
 
     initViews();
     initFirebase();
@@ -110,7 +106,7 @@ public class OrderActivity extends SuperFirebaseActivity {
 
   private void initRecycler() {
     mRecycler.setLayoutManager(new LinearLayoutManager(this));
-    mAdapter = new AdapterOrderItem(this, mOrder.getProductsCart());
+    mAdapter = new AdapterOrderItem(this, mOrder);
     mRecycler.setAdapter(mAdapter);
   }
 
@@ -128,8 +124,6 @@ public class OrderActivity extends SuperFirebaseActivity {
       // TODO: 18/11/2016 show secret code on UI:
     });
   }
-
-
 
   private void initFirebase() {
     mOrderRef = MyApplication.sOrdersReference.child(mOrder.getKey());
