@@ -16,8 +16,8 @@ public class NotificationTools {
   public static String TAG = NotificationTools.class.getSimpleName();
 
   public static void pushOrderFinished(Order order) {
-    //MyApplication.sEndpointInterface.pushOrderFinishedNotification(order.user.getToken(), order.user.getUid(), order.key);
-    MyApplication.sEndpointInterface.pushOrderFinishedNotification().enqueue(new Callback<User>() {
+    MyApplication.sEndpointInterface.pushOrderFinishedNotification(order.user.getToken(),
+        order.user.getUid(), order.secretCode).enqueue(new Callback<User>() {
       @Override public void onResponse(Call<User> call, Response<User> response) {
         Log.d(TAG,
             "onResponse() called with: call = [" + call + "], response = [" + response + "]");
