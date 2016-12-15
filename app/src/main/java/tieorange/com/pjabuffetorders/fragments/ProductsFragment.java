@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import java.util.ArrayList;
-import java.util.List;
 import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.activities.ui.GridItemSpacingDecorator;
@@ -87,7 +85,6 @@ public class ProductsFragment extends android.support.v4.app.Fragment {
   }
 
   private void initAdapter() {
-
     mAdapter =
         new FirebaseRecyclerAdapter<Product, ViewHolderProduct>(Product.class, R.layout.item_menu,
             ViewHolderProduct.class, MyApplication.sProductsReference) {

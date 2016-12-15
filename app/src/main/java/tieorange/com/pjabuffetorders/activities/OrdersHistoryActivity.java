@@ -54,6 +54,7 @@ import tieorange.com.pjabuffetorders.utils.FirebaseTools;
         viewHolder.init(model, position);
       }
     };
+
     mRecycler.setAdapter(mAdapter);
   }
 

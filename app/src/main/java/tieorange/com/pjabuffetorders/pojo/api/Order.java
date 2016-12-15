@@ -1,17 +1,16 @@
 package tieorange.com.pjabuffetorders.pojo.api;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.os.Build;
 import com.google.firebase.database.Exclude;
 import org.parceler.Parcel;
+import org.parceler.Transient;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.utils.CartTools;
 
 /**
  * Created by tieorange on 03/11/2016.
  */
-@Parcel public class Order extends BaseObservable {
+@Parcel public class Order {
 
   public static final String STATE_ORDERED = "39";
   public static final String STATE_ACCEPTED = "38";
@@ -27,6 +26,9 @@ import tieorange.com.pjabuffetorders.utils.CartTools;
   public String clientName;
   public String status;
   public String secretCode;
+  public User user;
+  @Transient public Object createdAt;
+
   @Exclude public String key;
 
   @Exclude private int position;
@@ -93,7 +95,7 @@ import tieorange.com.pjabuffetorders.utils.CartTools;
     this.key = key;
   }
 
-  @Bindable public Cart getProductsCart() {
+  public Cart getProductsCart() {
     return productsCart;
   }
 
@@ -102,7 +104,7 @@ import tieorange.com.pjabuffetorders.utils.CartTools;
     //notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.products);
   }
 
-  @Bindable public String getClientName() {
+  public String getClientName() {
     return clientName;
   }
 
@@ -111,7 +113,7 @@ import tieorange.com.pjabuffetorders.utils.CartTools;
     //notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.clientName);
   }
 
-  @Bindable public String getStatus() {
+  public String getStatus() {
     return status;
   }
 
@@ -120,7 +122,7 @@ import tieorange.com.pjabuffetorders.utils.CartTools;
     //notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.status);
   }
 
-  @Bindable public int getPosition() {
+  public int getPosition() {
     return position;
   }
 
@@ -129,7 +131,7 @@ import tieorange.com.pjabuffetorders.utils.CartTools;
     //notifyPropertyChanged(com.android.databinding.library.baseAdapters.BR.position);
   }
 
-  @Bindable public int getTextColor() {
+  public int getTextColor() {
     textColor = R.color.material_color_green_400;
 
     getExperiment(new IStatesSwitch() {
@@ -152,7 +154,7 @@ import tieorange.com.pjabuffetorders.utils.CartTools;
     return textColor;
   }
 
-  @Bindable public String getSecretCode() {
+  public String getSecretCode() {
     return secretCode;
   }
 
