@@ -1,12 +1,9 @@
 package tieorange.com.pjabuffetorders.utils;
 
-import android.support.annotation.NonNull;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import java.util.List;
 import java.util.UUID;
 import tieorange.com.pjabuffetorders.MyApplication;
-import tieorange.com.pjabuffetorders.ordersListLib.Product;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
 
 /**
@@ -32,6 +29,8 @@ public class OrderTools {
             iSecretCodeSetCompleted.onComplete(databaseError, databaseReference);
           }
         });
+
+    NotificationTools.pushOrderFinished(order);
   }
 
   public interface ISecretCodeSetCompleted {

@@ -21,6 +21,7 @@ import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.ordersListLib.AdapterOrderItem;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
+import tieorange.com.pjabuffetorders.utils.NotificationTools;
 import tieorange.com.pjabuffetorders.utils.OrderTools;
 import tieorange.com.pjabuffetorders.utils.Tools;
 
@@ -125,6 +126,8 @@ public class OrderActivity extends SuperFirebaseActivity {
   @OnClick(R.id.ready) public void onClickReady() {
     setOrderStatus(STATE_READY);
     OrderTools.setSecretCodeToFirebase(mOrder, (databaseError, databaseReference) -> {
+      mOrder.key = databaseReference.getKey();
+      NotificationTools.pushOrderFinished(mOrder);
       mSecretCodeLayout.setVisibility(VISIBLE);
       mSecretCode.setText(mOrder.secretCode);
     });
