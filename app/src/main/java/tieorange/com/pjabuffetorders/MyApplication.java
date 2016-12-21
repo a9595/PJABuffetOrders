@@ -14,8 +14,8 @@ import tieorange.com.pjabuffetorders.utils.Constants;
 
 public class MyApplication extends Application {
 
-  private static final String LOCAL_IP = "192.168.0.17";
-  //private static final String LOCAL_IP = "10.0.2.2";
+//  private static final String LOCAL_IP = "192.168.1.103";
+  private static final String LOCAL_IP = "10.0.2.2";
   private static final String BASE_URL = "http://" + LOCAL_IP + ":3000/";
   public static FirebaseDatabase sFirebaseDatabase;
   public static DatabaseReference sProductsReference;

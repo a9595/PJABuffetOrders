@@ -1,5 +1,6 @@
 package tieorange.com.pjabuffetorders.utils;
 
+import android.content.Context;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import java.util.UUID;
@@ -18,7 +19,7 @@ public class OrderTools {
     return uuid.toUpperCase();
   }
 
-  public static void setSecretCodeToFirebase(Order order,
+  public static void setSecretCodeToFirebase(Context context, Order order,
       final ISecretCodeSetCompleted iSecretCodeSetCompleted) {
     order.setSecretCode(getRandomCode());
 
@@ -30,7 +31,7 @@ public class OrderTools {
           }
         });
 
-    NotificationTools.pushOrderFinished(order);
+    NotificationTools.pushOrderFinished(context, order);
   }
 
   public interface ISecretCodeSetCompleted {

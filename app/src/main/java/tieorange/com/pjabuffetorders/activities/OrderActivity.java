@@ -125,12 +125,13 @@ public class OrderActivity extends SuperFirebaseActivity {
 
   @OnClick(R.id.ready) public void onClickReady() {
     setOrderStatus(STATE_READY);
-    OrderTools.setSecretCodeToFirebase(mOrder, (databaseError, databaseReference) -> {
-      mOrder.key = databaseReference.getKey();
-      NotificationTools.pushOrderFinished(mOrder);
-      mSecretCodeLayout.setVisibility(VISIBLE);
-      mSecretCode.setText(mOrder.secretCode);
-    });
+    OrderTools.setSecretCodeToFirebase(OrderActivity.this, mOrder,
+        (databaseError, databaseReference) -> {
+          mOrder.key = databaseReference.getKey();
+          NotificationTools.pushOrderFinished(OrderActivity.this, mOrder);
+          mSecretCodeLayout.setVisibility(VISIBLE);
+          mSecretCode.setText(mOrder.secretCode);
+        });
   }
 
   private void initFirebase() {
