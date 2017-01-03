@@ -19,7 +19,7 @@ public interface EndpointInterface {
                                              @Query("orderKey") String orderKey);
 
     // TODO: 19/12/2016 change Call<User> to ResponsePush  - check if was sent
-    @POST("notification/create")
-    Call<User> pushOrderFinishedNotificationBody(
+    @POST("notification")
+    Call<Void> pushOrderFinishedNotificationBody(
             @Body RequestBody json);
 }
