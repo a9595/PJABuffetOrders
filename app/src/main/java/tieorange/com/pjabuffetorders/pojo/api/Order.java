@@ -7,6 +7,9 @@ import com.google.firebase.database.Exclude;
 import org.parceler.Parcel;
 import org.parceler.Transient;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.utils.CartTools;
 
@@ -32,7 +35,8 @@ public class Order {
     public String secretCode;
     public User user;
 
-    public Long createdAt; // should be Long in this app
+    public HashMap<String, Object> createdAt; // should be Transient and Object in this app
+
 
     @Exclude
     public String key;
@@ -46,12 +50,20 @@ public class Order {
     public Order() {
     }
 
-    public Long getCreatedAt() {
-        if (createdAt instanceof Long) {
-            return (Long) createdAt;
-        }
-        return null;
+    public Map<String, Object> getCreatedAt() {
+        return createdAt;
     }
+
+    @Exclude
+    public Long getCreatedAtLong() {
+        try {
+            Object timestampStr = createdAt.get("timestamp");
+            return (Long) timestampStr;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
     public boolean isCurrentUser() {
         return clientName.equals(Build.MODEL);
