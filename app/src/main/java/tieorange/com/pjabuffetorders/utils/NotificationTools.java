@@ -23,10 +23,10 @@ import tieorange.com.pjabuffetorders.pojo.api.User;
 public class NotificationTools {
     private static String TAG = NotificationTools.class.getSimpleName();
 
-    public static void pushOrderFinished(Context context, Order order) {
+    public static void pushNotificationOrderFinished(Context context, Order order) {
         PushNotificationBuffet push = new PushNotificationBuffet(order);
         String pushJson = getJson(push);        //  {"orderKey":"-K__s9yOcM-CO9xeg_Xt","secretCode":"043","token":"c8MxKBXI4sI:APA91bEGF0ux03XYkVKqQ4x7xDWMsIJc04IMj1tbj72UdQzZtMQeauy2Yibl8hT4b3ozOWgOKDsp2FFjbYnUI3FmCIUfLLXiUBDnLWEfafJzb0ffAm88jeFRVGAYZMA7jmrfapSvHjtY","userUID":"Pixel"}
-        Log.d(TAG, "pushOrderFinished: json = " + pushJson);
+        Log.d(TAG, "pushNotificationOrderFinished: json = " + pushJson);
 
         //RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(jsonParams)).toString());
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");

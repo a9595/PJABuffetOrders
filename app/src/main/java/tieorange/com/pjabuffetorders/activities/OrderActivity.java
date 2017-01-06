@@ -128,7 +128,6 @@ public class OrderActivity extends SuperFirebaseActivity {
     OrderTools.setSecretCodeToFirebase(OrderActivity.this, mOrder,
         (databaseError, databaseReference) -> {
           mOrder.key = databaseReference.getKey();
-          NotificationTools.pushOrderFinished(OrderActivity.this, mOrder);
           mSecretCodeLayout.setVisibility(VISIBLE);
           mSecretCode.setText(mOrder.secretCode);
         });

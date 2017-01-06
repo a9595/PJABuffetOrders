@@ -28,10 +28,10 @@ public class OrderTools {
           @Override
           public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
             iSecretCodeSetCompleted.onComplete(databaseError, databaseReference);
+              NotificationTools.pushNotificationOrderFinished(context, order);
           }
         });
 
-    NotificationTools.pushOrderFinished(context, order);
   }
 
   public interface ISecretCodeSetCompleted {

@@ -35,8 +35,7 @@ public class Order {
     public String secretCode;
     public User user;
 
-    public HashMap<String, Object> createdAt; // should be Transient and Object in this app
-
+    public HashMap<String, Object> createdAt;
 
     @Exclude
     public String key;
