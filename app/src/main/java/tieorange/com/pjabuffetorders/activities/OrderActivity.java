@@ -1,6 +1,7 @@
 package tieorange.com.pjabuffetorders.activities;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -35,7 +36,8 @@ import static tieorange.com.pjabuffetorders.pojo.api.Order.STATE_REJECTED;
 
 public class OrderActivity extends SuperFirebaseActivity {
 
-  @InjectExtra Order mOrder;
+  @Nullable @InjectExtra Order mOrder;
+  @Nullable @InjectExtra String mOrderKey;
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.accept) Button mAccept;
   @BindView(R.id.reject) Button mReject;

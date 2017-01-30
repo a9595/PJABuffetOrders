@@ -3,6 +3,7 @@ package tieorange.com.pjabuffetorders.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,6 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -25,6 +29,7 @@ public class MainActivity extends SuperFirebaseActivity {
   private static final int ID_PRODUCTS = 1;
   @BindView(R.id.toolbar) public Toolbar mToolbar;
   @BindView(R.id.fragmentContainer) FrameLayout mFragmentContainer;
+  @BindView(R.id.fab) FloatingActionButton fab;
   private Drawer mDrawerBuild;
   private ProductsFragment mProductsFragment;
   private OrdersFragment mOrdersFragment;
@@ -33,7 +38,6 @@ public class MainActivity extends SuperFirebaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
-
     setSupportActionBar(mToolbar);
 
     initFragments();
@@ -91,6 +95,46 @@ public class MainActivity extends SuperFirebaseActivity {
 
       return true;
     };
+  }
+
+  @OnClick(R.id.fab) public void onClickFab() {
+    scanQrCode();
+  }
+
+  private void scanQrCode() {
+    IntentIntegrator integrator = new IntentIntegrator(this);
+    integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+    integrator.setPrompt("Scan a barcode");
+    integrator.setCameraId(0);  // Use a specific camera of the device
+    integrator.setBeepEnabled(true);
+    integrator.setBarcodeImageEnabled(true);
+    integrator.initiateScan();
+  }
+
+  private void scanQrCodeFinished(String orderKey) {
+    if (orderKey == null) {
+      Toast.makeText(this, "Please, try to scan again", Toast.LENGTH_SHORT).show();
+      return;
+    }
+
+    final Intent intent =
+        Henson.with(MainActivity.this).gotoOrderActivity().mOrderKey(orderKey).build();
+    startActivity(intent);
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+    if (result != null) {
+      final String orderKey = result.getContents();
+      if (orderKey == null) {
+        Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+      } else {
+        Toast.makeText(this, "Scanned: " + orderKey, Toast.LENGTH_LONG).show();
+        scanQrCodeFinished(orderKey);
+      }
+    } else {
+      super.onActivityResult(requestCode, resultCode, data);
+    }
   }
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
