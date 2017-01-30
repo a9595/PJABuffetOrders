@@ -21,7 +21,6 @@ import tieorange.com.pjabuffetorders.MyApplication;
 import tieorange.com.pjabuffetorders.R;
 import tieorange.com.pjabuffetorders.ordersListLib.AdapterOrderItem;
 import tieorange.com.pjabuffetorders.pojo.api.Order;
-import tieorange.com.pjabuffetorders.utils.NotificationTools;
 import tieorange.com.pjabuffetorders.utils.OrderTools;
 import tieorange.com.pjabuffetorders.utils.Tools;
 

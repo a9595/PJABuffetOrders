@@ -34,8 +34,8 @@
           app:popupTheme="@style/AppTheme.PopupOverlay"
           />
 
-    </android.support.design.widget.CollapsingToolbarLayout >
-  </android.support.design.widget.AppBarLayout >
+    </android.support.design.widget.CollapsingToolbarLayout>
+  </android.support.design.widget.AppBarLayout>
 
   <android.support.design.widget.FloatingActionButton
       android:id="@+id/fab"
@@ -45,6 +45,6 @@
       android:layout_margin="@dimen/fab_margin"
       app:srcCompat="@android:drawable/ic_dialog_email"
       />
-  <include layout="@layout/content_product" />
+  <include layout="@layout/content_product"/>
 
-</android.support.design.widget.CoordinatorLayout >
+</android.support.design.widget.CoordinatorLayout>

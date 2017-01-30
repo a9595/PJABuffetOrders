@@ -41,6 +41,10 @@ import org.parceler.Parcel;
     return productList;
   }
 
+  public static double convertIntToDoublePrice(int result) {
+    return result / 100f;
+  }
+
   @Exclude public String getStringPriceWithZlote() {
     double priceDouble = getDoublePrice();
     return String.format("%.2f", priceDouble) + " zł";
@@ -57,10 +61,6 @@ import org.parceler.Parcel;
 
   public double getDoublePrice() {
     return price / 100f;
-  }
-
-  public static double convertIntToDoublePrice(int result) {
-    return result / 100f;
   }
 
 

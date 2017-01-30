@@ -13,13 +13,10 @@ import retrofit2.http.Query;
 
 public interface EndpointInterface {
 
-    @GET("demo/index")
-    Call<User> pushOrderFinishedNotification(@Query("token") String token,
-                                             @Query("uid") String uid, @Query("secretCode") String secretCode,
-                                             @Query("orderKey") String orderKey);
+  @GET("demo/index") Call<User> pushOrderFinishedNotification(@Query("token") String token,
+      @Query("uid") String uid, @Query("secretCode") String secretCode,
+      @Query("orderKey") String orderKey);
 
-    // TODO: 19/12/2016 change Call<Void> to ResponsePush  - check if was sent
-    @POST("api/push")
-    Call<Void> pushOrderFinishedNotificationBody(
-            @Body RequestBody json);
+  // TODO: 19/12/2016 change Call<Void> to ResponsePush  - check if was sent
+  @POST("api/push") Call<Void> pushOrderFinishedNotificationBody(@Body RequestBody json);
 }
