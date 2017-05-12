@@ -16,7 +16,7 @@ public class MyApplication extends Application {
   //  private static final String LOCAL_IP = "192.168.1.103";
   private static final String LOCAL_IP = "10.0.2.2";
   //  private static final String BASE_URL = "http://" + LOCAL_IP + ":3000/";
-  private static final String BASE_URL = "https://cryptic-chamber-82312.herokuapp.com/";
+  private static final String BASE_URL = "https://afternoon-savannah-24914.herokuapp.com/";
   public static FirebaseDatabase sFirebaseDatabase;
   public static DatabaseReference sProductsReference;
   public static DatabaseReference sOrdersReference;
